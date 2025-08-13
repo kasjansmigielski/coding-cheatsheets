@@ -4,7 +4,7 @@ project:
   resources: ["requirements.txt"]
 
 website:
-  title: "Coding Cheatsheets"
+  title: "Coding Cheatsheets with Kasjan"
   repo-url: https://github.com/kasjansmigielski/coding-cheatsheets
   repo-branch: main
   repo-actions: [source, edit, issue]
