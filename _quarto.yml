@@ -4,7 +4,7 @@ project:
 
 website:
   title: "Coding Cheatsheets"
-  repo-url: https://github.com/kasjansmigielski/cheatsheets
+  repo-url: https://github.com/kasjansmigielski/coding-cheatsheets
   repo-actions: [source]
   navbar:
     left:
