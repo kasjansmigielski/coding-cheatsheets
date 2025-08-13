@@ -28,6 +28,20 @@
     "text": "3) List Comprehension — szybko twórz listy\n\nnums = [1, 2, 3, 4, 5]\nsquares_even = [x*x for x in nums if x % 2 == 0]\nsquares_even\n\n[4, 16]\n\n\n\n\nMini-zadanie ✅\nWygeneruj listę długości każdego napisu w fruits, ale tylko dla owoców o nazwie dłuższej niż 5 znaków.\n\n# TODO: uzupełnij list comprehension\nfruits = [\"apple\", \"banana\", \"cherry\", \"kiwi\"]\n# lengths = [...]\n# lengths"
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome",
+    "section": "",
+    "text": "Szybkie, krótkie ściągi z Pythona i Pandas do utrwalenia podstaw. Każda karta ma 2–3 protipy i mini-zadanie.\n\n\n\nPython Basics\nPandas Filtering\n\n\nTip: Kliknij ikonę Copy w prawym górnym rogu bloków kodu, żeby szybko wkleić do swojego notatnika."
+  },
+  {
+    "objectID": "index.html#zacznij-tutaj",
+    "href": "index.html#zacznij-tutaj",
+    "title": "Welcome",
+    "section": "",
+    "text": "Python Basics\nPandas Filtering\n\n\nTip: Kliknij ikonę Copy w prawym górnym rogu bloków kodu, żeby szybko wkleić do swojego notatnika."
+  },
+  {
     "objectID": "cheatsheets/02-pandas-filtering.html",
     "href": "cheatsheets/02-pandas-filtering.html",
     "title": "Pandas — filtrowanie trzema sposobami",
