@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Coding Cheatsheets"
+  repo-url: https://github.com/kasjansmigielski/cheatsheets
+  repo-actions: [source]
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Cheatsheets"
+        menu:
+          - text: "Python Basics"
+            href: cheatsheets/01-python-basics.qmd
+          - text: "Pandas Filtering"
+            href: cheatsheets/02-pandas-filtering.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    css: styles.css
+    code-tools: true
+    thebe: true
+execute:
+  echo: true
+  warning: false
+  message: false
+  # freeze: auto

@@ -1,0 +1,6 @@
+/* Minimal styling to make callouts and code look nice */
+.quarto-title-block .quarto-title { letter-spacing: .2px; }
+.callout-tip, .callout-note, .callout-important { border-radius: 12px; }
+pre code { font-size: 0.95rem; }
+.task-box { padding: 1rem; border: 1px dashed #aaa; border-radius: 10px; background: #fafafa; }
+.small { font-size: 0.9rem; color: #666; }

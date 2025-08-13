@@ -1,0 +1,58 @@
+[
+  {
+    "objectID": "cheatsheets/01-python-basics.html",
+    "href": "cheatsheets/01-python-basics.html",
+    "title": "Python Basics — 3 protipy",
+    "section": "",
+    "text": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, f in enumerate(fruits, start=1):\n    print(i, f)\n\n1 apple\n2 banana\n3 cherry\n\n\nDlaczego warto: zamiast ręcznie liczyć indeksy."
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#enumerate-numeruj-elementy-w-pętli",
+    "href": "cheatsheets/01-python-basics.html#enumerate-numeruj-elementy-w-pętli",
+    "title": "Python Basics — 3 protipy",
+    "section": "",
+    "text": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, f in enumerate(fruits, start=1):\n    print(i, f)\n\n1 apple\n2 banana\n3 cherry\n\n\nDlaczego warto: zamiast ręcznie liczyć indeksy."
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#zip-paruj-listy-w-locie",
+    "href": "cheatsheets/01-python-basics.html#zip-paruj-listy-w-locie",
+    "title": "Python Basics — 3 protipy",
+    "section": "2) zip — paruj listy w locie",
+    "text": "2) zip — paruj listy w locie\n\nnames = [\"Ala\", \"Bartek\", \"Cezary\"]\nscores = [84, 92, 78]\nfor name, score in zip(names, scores):\n    print(f\"{name}: {score}\")\n\nAla: 84\nBartek: 92\nCezary: 78\n\n\nProtip: list(zip(names, scores)) da listę krotek."
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#list-comprehension-szybko-twórz-listy",
+    "href": "cheatsheets/01-python-basics.html#list-comprehension-szybko-twórz-listy",
+    "title": "Python Basics — 3 protipy",
+    "section": "3) List Comprehension — szybko twórz listy",
+    "text": "3) List Comprehension — szybko twórz listy\n\nnums = [1, 2, 3, 4, 5]\nsquares_even = [x*x for x in nums if x % 2 == 0]\nsquares_even\n\n[4, 16]\n\n\n\n\nMini-zadanie ✅\nWygeneruj listę długości każdego napisu w fruits, ale tylko dla owoców o nazwie dłuższej niż 5 znaków.\n\n# TODO: uzupełnij list comprehension\nfruits = [\"apple\", \"banana\", \"cherry\", \"kiwi\"]\n# lengths = [...]\n# lengths"
+  },
+  {
+    "objectID": "cheatsheets/02-pandas-filtering.html",
+    "href": "cheatsheets/02-pandas-filtering.html",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "",
+    "text": "Załóżmy prosty DataFrame:\nimport pandas as pd\n\ndf = pd.DataFrame({\n    \"city\": [\"WAW\",\"WRO\",\"KRK\",\"GDA\",\"POZ\"],\n    \"temp\": [23, 25, 21, 19, 24],\n    \"rain\": [False, True, False, True, False]\n})\ndf\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n1\nWRO\n25\nTrue\n\n\n2\nKRK\n21\nFalse\n\n\n3\nGDA\n19\nTrue\n\n\n4\nPOZ\n24\nFalse"
+  },
+  {
+    "objectID": "cheatsheets/02-pandas-filtering.html#filtrowanie-maską-bool-najczęstsze",
+    "href": "cheatsheets/02-pandas-filtering.html#filtrowanie-maską-bool-najczęstsze",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "1) Filtrowanie maską bool (najczęstsze)",
+    "text": "1) Filtrowanie maską bool (najczęstsze)\n\nhot = df[\"temp\"] &gt;= 23\ndf[hot]\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n1\nWRO\n25\nTrue\n\n\n4\nPOZ\n24\nFalse"
+  },
+  {
+    "objectID": "cheatsheets/02-pandas-filtering.html#query-czytelne-warunki-jako-string",
+    "href": "cheatsheets/02-pandas-filtering.html#query-czytelne-warunki-jako-string",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "2) .query() — czytelne warunki jako string",
+    "text": "2) .query() — czytelne warunki jako string\n\ndf.query(\"temp &gt;= 23 and rain == False\")\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n4\nPOZ\n24\nFalse"
+  },
+  {
+    "objectID": "cheatsheets/02-pandas-filtering.html#loc-jawnie-po-wierszachkolumnach",
+    "href": "cheatsheets/02-pandas-filtering.html#loc-jawnie-po-wierszachkolumnach",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "3) .loc — jawnie po wierszach/kolumnach",
+    "text": "3) .loc — jawnie po wierszach/kolumnach\n\ndf.loc[df[\"temp\"].ge(23) & ~df[\"rain\"], [\"city\", \"temp\"]]\n\n\n\n\n\n\n\n\ncity\ntemp\n\n\n\n\n0\nWAW\n23\n\n\n4\nPOZ\n24\n\n\n\n\n\n\n\n\n\nMini-zadanie ✅\nWyfiltruj miasta, w których nie pada i temperatura jest poniżej 24, zwracając tylko kolumny city i temp.\n\n# TODO: napisz filtr na 2 różne sposoby (maską i .query())\n# 1) maska bool:\n# ...\n\n# 2) query():\n# ..."
+  }
+]

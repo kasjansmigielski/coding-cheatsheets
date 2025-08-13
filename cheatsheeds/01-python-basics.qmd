@@ -1,0 +1,45 @@
+---
+title: "Python Basics — 3 protipy"
+---
+
+## 1) `enumerate` — numeruj elementy w pętli
+```{python}
+fruits = ["apple", "banana", "cherry"]
+for i, f in enumerate(fruits, start=1):
+    print(i, f)
+```
+
+**Dlaczego warto:** zamiast ręcznie liczyć indeksy.
+
+---
+
+## 2) `zip` — paruj listy w locie
+```{python}
+names = ["Ala", "Bartek", "Cezary"]
+scores = [84, 92, 78]
+for name, score in zip(names, scores):
+    print(f"{name}: {score}")
+```
+
+**Protip:** `list(zip(names, scores))` da listę krotek.
+
+---
+
+## 3) List Comprehension — szybko twórz listy
+```{python}
+nums = [1, 2, 3, 4, 5]
+squares_even = [x*x for x in nums if x % 2 == 0]
+squares_even
+```
+
+---
+
+### Mini-zadanie ✅
+Wygeneruj listę **długości** każdego napisu w `fruits`, ale **tylko** dla owoców o nazwie dłuższej niż 5 znaków.
+
+```{python}
+# TODO: uzupełnij list comprehension
+fruits = ["apple", "banana", "cherry", "kiwi"]
+# lengths = [...]
+# lengths
+```

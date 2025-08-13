@@ -1,0 +1,111 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Python Basics — 3 protipy\"\n",
+        "---\n",
+        "\n",
+        "## 1) `enumerate` — numeruj elementy w pętli"
+      ],
+      "id": "55ebf299"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fruits = [\"apple\", \"banana\", \"cherry\"]\n",
+        "for i, f in enumerate(fruits, start=1):\n",
+        "    print(i, f)"
+      ],
+      "id": "f9b6d31d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Dlaczego warto:** zamiast ręcznie liczyć indeksy.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 2) `zip` — paruj listy w locie"
+      ],
+      "id": "bbd1dd4c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "names = [\"Ala\", \"Bartek\", \"Cezary\"]\n",
+        "scores = [84, 92, 78]\n",
+        "for name, score in zip(names, scores):\n",
+        "    print(f\"{name}: {score}\")"
+      ],
+      "id": "770dc26b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Protip:** `list(zip(names, scores))` da listę krotek.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 3) List Comprehension — szybko twórz listy"
+      ],
+      "id": "abbb82d1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "nums = [1, 2, 3, 4, 5]\n",
+        "squares_even = [x*x for x in nums if x % 2 == 0]\n",
+        "squares_even"
+      ],
+      "id": "1c92c507",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "### Mini-zadanie ✅\n",
+        "Wygeneruj listę **długości** każdego napisu w `fruits`, ale **tylko** dla owoców o nazwie dłuższej niż 5 znaków."
+      ],
+      "id": "432665e1"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# TODO: uzupełnij list comprehension\n",
+        "fruits = [\"apple\", \"banana\", \"cherry\", \"kiwi\"]\n",
+        "# lengths = [...]\n",
+        "# lengths"
+      ],
+      "id": "f4e7c4ee",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/opt/homebrew/Caskroom/mambaforge/base/envs/quarto-py/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

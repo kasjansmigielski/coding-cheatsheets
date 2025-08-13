@@ -1,0 +1,14 @@
+---
+title: "Welcome"
+page-layout: article
+---
+
+# Coding Cheatsheets
+
+Szybkie, krótkie ściągi z Pythona i Pandas do utrwalenia podstaw. Każda karta ma 2–3 protipy i mini-zadanie.
+
+## Zacznij tutaj
+- [Python Basics](cheatsheets/01-python-basics.qmd)
+- [Pandas Filtering](cheatsheets/02-pandas-filtering.qmd)
+
+> Tip: Kliknij ikonę **Copy** w prawym górnym rogu bloków kodu, żeby szybko wkleić do swojego notatnika.

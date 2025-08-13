@@ -1,0 +1,12 @@
+{
+  "hash": "ff79e0e000da1dbdf7f214205cf0403a",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Python Basics — 3 protipy\"\n---\n\n## 1) `enumerate` — numeruj elementy w pętli\n\n::: {#f36c8d6d .cell execution_count=1}\n``` {.python .cell-code}\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, f in enumerate(fruits, start=1):\n    print(i, f)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n1 apple\n2 banana\n3 cherry\n```\n:::\n:::\n\n\n**Dlaczego warto:** zamiast ręcznie liczyć indeksy.\n\n---\n\n## 2) `zip` — paruj listy w locie\n\n::: {#3edf477f .cell execution_count=2}\n``` {.python .cell-code}\nnames = [\"Ala\", \"Bartek\", \"Cezary\"]\nscores = [84, 92, 78]\nfor name, score in zip(names, scores):\n    print(f\"{name}: {score}\")\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nAla: 84\nBartek: 92\nCezary: 78\n```\n:::\n:::\n\n\n**Protip:** `list(zip(names, scores))` da listę krotek.\n\n---\n\n## 3) List Comprehension — szybko twórz listy\n\n::: {#7bd29013 .cell execution_count=3}\n``` {.python .cell-code}\nnums = [1, 2, 3, 4, 5]\nsquares_even = [x*x for x in nums if x % 2 == 0]\nsquares_even\n```\n\n::: {.cell-output .cell-output-display execution_count=11}\n```\n[4, 16]\n```\n:::\n:::\n\n\n---\n\n### Mini-zadanie ✅\nWygeneruj listę **długości** każdego napisu w `fruits`, ale **tylko** dla owoców o nazwie dłuższej niż 5 znaków.\n\n::: {#907984e0 .cell execution_count=4}\n``` {.python .cell-code}\n# TODO: uzupełnij list comprehension\nfruits = [\"apple\", \"banana\", \"cherry\", \"kiwi\"]\n# lengths = [...]\n# lengths\n```\n:::\n\n\n",
+    "supporting": [
+      "01-python-basics_files/figure-html"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

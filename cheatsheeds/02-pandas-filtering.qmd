@@ -1,0 +1,46 @@
+---
+title: "Pandas — filtrowanie trzema sposobami"
+---
+
+Załóżmy prosty DataFrame:
+
+```{python}
+import pandas as pd
+
+df = pd.DataFrame({
+    "city": ["WAW","WRO","KRK","GDA","POZ"],
+    "temp": [23, 25, 21, 19, 24],
+    "rain": [False, True, False, True, False]
+})
+df
+```
+
+## 1) Filtrowanie maską bool (najczęstsze)
+```{python}
+hot = df["temp"] >= 23
+df[hot]
+```
+
+## 2) `.query()` — czytelne warunki jako string
+```{python}
+df.query("temp >= 23 and rain == False")
+```
+
+## 3) `.loc` — jawnie po wierszach/kolumnach
+```{python}
+df.loc[df["temp"].ge(23) & ~df["rain"], ["city", "temp"]]
+```
+
+---
+
+### Mini-zadanie ✅
+Wyfiltruj miasta, w których **nie pada** i temperatura jest **poniżej 24**, zwracając tylko kolumny `city` i `temp`.
+
+```{python}
+# TODO: napisz filtr na 2 różne sposoby (maską i .query())
+# 1) maska bool:
+# ...
+
+# 2) query():
+# ...
+```
