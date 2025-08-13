@@ -1,9 +1,14 @@
 ---
 title: "Python Basics — 3 protipy"
+format:
+  html:
+    code-tools: true
+    thebe: true
 ---
 
 ## 1) `enumerate` — numeruj elementy w pętli
 ```{python}
+#| classes: thebe
 fruits = ["apple", "banana", "cherry"]
 for i, f in enumerate(fruits, start=1):
     print(i, f)
@@ -15,6 +20,7 @@ for i, f in enumerate(fruits, start=1):
 
 ## 2) `zip` — paruj listy w locie
 ```{python}
+#| classes: thebe
 names = ["Ala", "Bartek", "Cezary"]
 scores = [84, 92, 78]
 for name, score in zip(names, scores):
@@ -27,6 +33,7 @@ for name, score in zip(names, scores):
 
 ## 3) List Comprehension — szybko twórz listy
 ```{python}
+#| classes: thebe
 nums = [1, 2, 3, 4, 5]
 squares_even = [x*x for x in nums if x % 2 == 0]
 squares_even
@@ -38,6 +45,7 @@ squares_even
 Wygeneruj listę **długości** każdego napisu w `fruits`, ale **tylko** dla owoców o nazwie dłuższej niż 5 znaków.
 
 ```{python}
+#| classes: thebe
 # TODO: uzupełnij list comprehension
 fruits = ["apple", "banana", "cherry", "kiwi"]
 # lengths = [...]

@@ -7,7 +7,6 @@ website:
   title: "Coding Cheatsheets with Kasjan"
   repo-url: https://github.com/kasjansmigielski/coding-cheatsheets
   repo-branch: main
-  # repo-actions: [source]
   navbar:
     left:
       - text: "Home"
@@ -27,10 +26,27 @@ format:
     code-overflow: wrap
     css: styles.css
     code-tools: true
-    thebe:
-      repo: kasjansmigielski/coding-cheatsheets   # jawnie: skąd Binder ma brać kod
-      branch: main
-      kernelName: python3
+    code-fold: false
+    code-summary: "Pokaż kod"
+    code-line-numbers: false
+    include-in-header:
+      - text: |
+          <script src="https://unpkg.com/thebelab@latest"></script>
+          <script>
+            thebelab.bootstrap({
+              requestKernel: true,
+              binderOptions: {
+                repo: "kasjansmigielski/coding-cheatsheets",
+                ref: "main"
+              },
+              kernelOptions: {
+                name: "python3"
+              },
+              codeMirrorConfig: {
+                theme: "default"
+              }
+            });
+          </script>
 execute:
   echo: true
   warning: false

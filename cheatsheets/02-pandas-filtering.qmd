@@ -1,10 +1,15 @@
 ---
 title: "Pandas — filtrowanie trzema sposobami"
+format:
+  html:
+    code-tools: true
+    thebe: true
 ---
 
 Załóżmy prosty DataFrame:
 
 ```{python}
+#| classes: thebe
 import pandas as pd
 
 df = pd.DataFrame({
@@ -17,17 +22,20 @@ df
 
 ## 1) Filtrowanie maską bool (najczęstsze)
 ```{python}
+#| classes: thebe
 hot = df["temp"] >= 23
 df[hot]
 ```
 
 ## 2) `.query()` — czytelne warunki jako string
 ```{python}
+#| classes: thebe
 df.query("temp >= 23 and rain == False")
 ```
 
 ## 3) `.loc` — jawnie po wierszach/kolumnach
 ```{python}
+#| classes: thebe
 df.loc[df["temp"].ge(23) & ~df["rain"], ["city", "temp"]]
 ```
 
@@ -37,6 +45,7 @@ df.loc[df["temp"].ge(23) & ~df["rain"], ["city", "temp"]]
 Wyfiltruj miasta, w których **nie pada** i temperatura jest **poniżej 24**, zwracając tylko kolumny `city` i `temp`.
 
 ```{python}
+#| classes: thebe
 # TODO: napisz filtr na 2 różne sposoby (maską i .query())
 # 1) maska bool:
 # ...

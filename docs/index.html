@@ -102,6 +102,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://unpkg.com/thebelab@latest"></script>
+<script>
+  thebelab.bootstrap({
+    requestKernel: true,
+    binderOptions: {
+      repo: "kasjansmigielski/coding-cheatsheets",
+      ref: "main"
+    },
+    kernelOptions: {
+      name: "python3"
+    },
+    codeMirrorConfig: {
+      theme: "default"
+    }
+  });
+</script>
 
 
 <link rel="stylesheet" href="styles.css">
