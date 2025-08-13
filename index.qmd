@@ -1,14 +1,58 @@
 ---
-title: "Welcome"
+title: "Witaj na stronie!"
 page-layout: article
 ---
 
-# Coding Cheatsheets
+# 💻 Coding Cheatsheets
 
-Szybkie, krótkie ściągi z Pythona i Pandas do utrwalenia podstaw. Każda karta ma 2–3 protipy i mini-zadanie.
+Witaj w interaktywnej kolekcji ściąg z podstaw programowania! Znajdziesz tutaj **krótkie, praktyczne protipsy** z Pythona, Pandas i innych bibliotek, które pomogą Ci opanować najważniejsze techniki programistyczne.
 
-## Zacznij tutaj
-- [Python Basics](cheatsheets/01-python-basics.qmd)
-- [Pandas Filtering](cheatsheets/02-pandas-filtering.qmd)
+## 🎯 Co znajdziesz w każdej ściągawce?
 
-> Tip: Kliknij ikonę **Copy** w prawym górnym rogu bloków kodu, żeby szybko wkleić do swojego notatnika.
+- **2-3 konkretne protipsy** z wyjaśnieniami
+- **Praktyczne przykłady kodu** gotowe do kopiowania
+- **Mini-zadania** do samodzielnego rozwiązania
+- **Interaktywny tryb edycji** do eksperymentowania z kodem
+
+## ✏️ Tryb Edycji - Twój kod na żywo!
+
+Na większości stron zobaczysz przycisk **"Tryb Edycji"** w prawym dolnym rogu. Po jego kliknięciu:
+
+- 🔄 **Edytuj kod bezpośrednio** w przeglądarce
+- ▶️ **Uruchamiaj kod na żywo** i zobacz wyniki
+- 🔄 **Eksperymentuj** bez obaw - zawsze możesz wrócić do oryginału
+- 📚 **Ucz się przez praktykę** - najlepszy sposób na naukę programowania!
+
+::: {.callout-tip}
+## Jak uruchomić tryb edycji?
+1. Kliknij **"✏️ Tryb Edycji"** w prawym dolnym rogu
+2. Poczekaj aż Python się załaduje (około 10-15 sekund) 
+3. Modyfikuj kod i klikaj **"▶️ Run"** aby zobaczyć wyniki!
+
+**Uwaga:** Przy pierwszym uruchomieniu Python i pandas ładują się z internetu - to może potrwać chwilę.
+:::
+
+## 📚 Dostępne ściągi
+
+### Podstawy Pythona
+- [**Python Basics**](cheatsheets/01-python-basics.qmd) - Zmienne, listy, pętle i funkcje
+
+### Pandas & Analiza Danych  
+- [**Pandas Filtering**](cheatsheets/02-pandas-filtering.qmd) - Filtrowanie i selekcja danych
+
+::: {.callout-note}
+## 💡 Więcej ściąg wkrótce!
+Ta kolekcja będzie się rozrastać o nowe biblioteki i zaawansowane techniki. Śledź aktualizacje!
+:::
+
+## 🚀 Szybki start
+
+1. **Wybierz ściągę** z listy powyżej
+2. **Przeczytaj protipsy** i spróbuj zrozumieć przykłady  
+3. **Skopiuj kod** (ikona Copy w prawym górnym rogu bloku)
+4. **Eksperymentuj** używając trybu edycji
+5. **Rozwiąż mini-zadanie** na końcu każdej strony
+
+---
+
+**Miłej nauki!** 🎓

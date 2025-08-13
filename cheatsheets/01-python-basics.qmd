@@ -3,7 +3,6 @@ title: "Python Basics — 3 protipy"
 format:
   html:
     code-tools: true
-    thebe: true
 ---
 
 ## 1) `enumerate` — numeruj elementy w pętli

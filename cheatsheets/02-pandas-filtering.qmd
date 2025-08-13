@@ -3,7 +3,6 @@ title: "Pandas — filtrowanie trzema sposobami"
 format:
   html:
     code-tools: true
-    thebe: true
 ---
 
 Załóżmy prosty DataFrame:

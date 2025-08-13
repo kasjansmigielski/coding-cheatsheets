@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Pandas — filtrowanie trzema sposobami – Coding Cheatsheets with Kasjan</title>
+<title>Pandas — filtrowanie trzema sposobami – Coding Cheatsheets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,22 +105,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-<script src="https://unpkg.com/thebelab@latest"></script>
-<script>
-  thebelab.bootstrap({
-    requestKernel: true,
-    binderOptions: {
-      repo: "kasjansmigielski/coding-cheatsheets",
-      ref: "main"
-    },
-    kernelOptions: {
-      name: "python3"
-    },
-    codeMirrorConfig: {
-      theme: "default"
-    }
-  });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/default.min.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+<style>
+  /* Style dla edytora kodu */
+  .code-editor-container {
+    position: relative;
+    margin: 10px 0;
+  }
+  .CodeMirror {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    min-height: 100px !important;
+  }
+  .code-controls {
+    margin: 5px 0;
+  }
+  .code-controls button {
+    margin-right: 5px;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .run-btn {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+  }
+  .run-btn:hover {
+    background-color: #218838;
+  }
+
+  .restart-btn {
+    background-color: #ffc107;
+    color: #212529;
+    border-color: #ffc107;
+  }
+  .restart-btn:hover {
+    background-color: #e0a800;
+  }
+  .code-output {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+    min-height: 30px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .output-success {
+    border-color: #28a745;
+    background-color: #d4edda;
+  }
+  .output-error {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+</style>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -134,7 +185,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">Coding Cheatsheets with Kasjan</span>
+    <span class="navbar-title">Coding Cheatsheets</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -210,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Załóżmy prosty DataFrame:</p>
-<div id="377bfc56" class="cell thebe" data-execution_count="1">
+<div id="166cab17" class="cell thebe" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
@@ -219,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rain"</span>: [<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>]</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 
 
@@ -271,10 +322,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="filtrowanie-maską-bool-najczęstsze" class="level2">
 <h2 class="anchored" data-anchor-id="filtrowanie-maską-bool-najczęstsze">1) Filtrowanie maską bool (najczęstsze)</h2>
-<div id="2bbcc708" class="cell thebe" data-execution_count="2">
+<div id="0b63a1fd" class="cell thebe" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hot <span class="op">=</span> df[<span class="st">"temp"</span>] <span class="op">&gt;=</span> <span class="dv">23</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df[hot]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
 
@@ -315,9 +366,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="query-czytelne-warunki-jako-string" class="level2">
 <h2 class="anchored" data-anchor-id="query-czytelne-warunki-jako-string">2) <code>.query()</code> — czytelne warunki jako string</h2>
-<div id="c8e08103" class="cell thebe" data-execution_count="3">
+<div id="75c852bd" class="cell thebe" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df.query(<span class="st">"temp &gt;= 23 and rain == False"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
 
@@ -352,9 +403,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="loc-jawnie-po-wierszachkolumnach" class="level2">
 <h2 class="anchored" data-anchor-id="loc-jawnie-po-wierszachkolumnach">3) <code>.loc</code> — jawnie po wierszach/kolumnach</h2>
-<div id="f6b5395c" class="cell thebe" data-execution_count="4">
+<div id="72a893b2" class="cell thebe" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">"temp"</span>].ge(<span class="dv">23</span>) <span class="op">&amp;</span> <span class="op">~</span>df[<span class="st">"rain"</span>], [<span class="st">"city"</span>, <span class="st">"temp"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -387,7 +438,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="mini-zadanie" class="level3">
 <h3 class="anchored" data-anchor-id="mini-zadanie">Mini-zadanie ✅</h3>
 <p>Wyfiltruj miasta, w których <strong>nie pada</strong> i temperatura jest <strong>poniżej 24</strong>, zwracając tylko kolumny <code>city</code> i <code>temp</code>.</p>
-<div id="61a3c283" class="cell thebe" data-execution_count="5">
+<div id="16129a4f" class="cell thebe" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: napisz filtr na 2 różne sposoby (maską i .query())</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) maska bool:</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
@@ -858,59 +909,331 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    thebe: true</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>Załóżmy prosty DataFrame:</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"city"</span>: [<span class="st">"WAW"</span>,<span class="st">"WRO"</span>,<span class="st">"KRK"</span>,<span class="st">"GDA"</span>,<span class="st">"POZ"</span>],</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"temp"</span>: [<span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">24</span>],</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rain"</span>: [<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>]</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1) Filtrowanie maską bool (najczęstsze)</span></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>hot <span class="op">=</span> df[<span class="st">"temp"</span>] <span class="op">&gt;=</span> <span class="dv">23</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>df[hot]</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2) `.query()` — czytelne warunki jako string</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>df.query(<span class="st">"temp &gt;= 23 and rain == False"</span>)</span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3) `.loc` — jawnie po wierszach/kolumnach</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">"temp"</span>].ge(<span class="dv">23</span>) <span class="op">&amp;</span> <span class="op">~</span>df[<span class="st">"rain"</span>], [<span class="st">"city"</span>, <span class="st">"temp"</span>]]</span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mini-zadanie ✅</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>Wyfiltruj miasta, w których **nie pada** i temperatura jest **poniżej 24**, zwracając tylko kolumny <span class="in">`city`</span> i <span class="in">`temp`</span>.</span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: napisz filtr na 2 różne sposoby (maską i .query())</span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) maska bool:</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) query():</span></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>Załóżmy prosty DataFrame:</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"city"</span>: [<span class="st">"WAW"</span>,<span class="st">"WRO"</span>,<span class="st">"KRK"</span>,<span class="st">"GDA"</span>,<span class="st">"POZ"</span>],</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"temp"</span>: [<span class="dv">23</span>, <span class="dv">25</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">24</span>],</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rain"</span>: [<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>]</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>df</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1) Filtrowanie maską bool (najczęstsze)</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>hot <span class="op">=</span> df[<span class="st">"temp"</span>] <span class="op">&gt;=</span> <span class="dv">23</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>df[hot]</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2) `.query()` — czytelne warunki jako string</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>df.query(<span class="st">"temp &gt;= 23 and rain == False"</span>)</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3) `.loc` — jawnie po wierszach/kolumnach</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>df.loc[df[<span class="st">"temp"</span>].ge(<span class="dv">23</span>) <span class="op">&amp;</span> <span class="op">~</span>df[<span class="st">"rain"</span>], [<span class="st">"city"</span>, <span class="st">"temp"</span>]]</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mini-zadanie ✅</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>Wyfiltruj miasta, w których **nie pada** i temperatura jest **poniżej 24**, zwracając tylko kolumny <span class="in">`city`</span> i <span class="in">`temp`</span>.</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| classes: thebe</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: napisz filtr na 2 różne sposoby (maską i .query())</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) maska bool:</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) query():</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<div id="edit-mode-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+  <button class="btn btn-success" onclick="toggleEditMode()">✏️ Tryb Edycji</button>
+</div>
+<div id="edit-status" style="position: fixed; bottom: 70px; right: 20px; z-index: 1000; display: none;">
+  <div class="alert alert-info">Tryb edycji aktywny</div>
+</div>
+<script>
+  // Ukryj przycisk "Tryb Edycji" na określonych stronach
+  document.addEventListener('DOMContentLoaded', function() {
+    const path = window.location.pathname;
+    const shouldHideButton = path.includes('pandas-filtering') || 
+                           path === '/' || 
+                           path.includes('index.html') ||
+                           path.includes('LIVE_CODE_SETUP');
+    
+    if (shouldHideButton) {
+      const editButton = document.getElementById('edit-mode-button');
+      if (editButton) {
+        editButton.style.display = 'none';
+      }
+    }
+  });
+</script>
+<script>
+  let originalCodeCells = new Map();
+  let editModeActive = false;
+  let editors = new Map();
+  let pyodide = null;
+  let pyodideReady = false;
+  
+  // Inicjalizuj Pyodide
+  async function initPyodide() {
+    if (pyodideReady) return;
+    
+    console.log('🐍 Ładowanie Pyodide...');
+    try {
+      pyodide = await loadPyodide({
+        indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+      });
+      
+      // Załaduj podstawowe pakiety
+      console.log('📦 Ładowanie pandas i numpy...');
+      await pyodide.loadPackage(["numpy", "pandas"]);
+      
+      pyodideReady = true;
+      console.log('✅ Pyodide gotowy!');
+    } catch (error) {
+      console.error('❌ Błąd ładowania Pyodide:', error);
+    }
+  }
+  
+  function toggleEditMode() {
+    if (editModeActive) {
+      deactivateEditMode();
+    } else {
+      activateEditMode();
+    }
+  }
+  
+  async function activateEditMode() {
+    console.log('Activating edit mode...');
+    editModeActive = true;
+    
+    // Pokaż status ładowania
+    document.getElementById('edit-status').innerHTML = '<div class="alert alert-info">🐍 Ładowanie Python...</div>';
+    document.getElementById('edit-status').style.display = 'block';
+    document.getElementById('edit-mode-button').innerHTML = '<button class="btn btn-warning" onclick="toggleEditMode()">❌ Wyłącz Edycję</button>';
+    
+    // Inicjalizuj Pyodide
+    await initPyodide();
+    
+    // Zaktualizuj status
+    if (pyodideReady) {
+      document.getElementById('edit-status').innerHTML = '<div class="alert alert-success">✅ Python gotowy!</div>';
+    } else {
+      document.getElementById('edit-status').innerHTML = '<div class="alert alert-danger">❌ Błąd ładowania Python</div>';
+      setTimeout(() => document.getElementById('edit-status').style.display = 'none', 3000);
+      return;
+    }
+    
+    // Znajdź wszystkie komórki z kodem
+    document.querySelectorAll('.thebe .sourceCode.cell-code').forEach(function(cell, index) {
+      // Zapisz oryginalny kod wraz z pełnym HTML i klasami
+      if (!originalCodeCells.has(index)) {
+        originalCodeCells.set(index, cell.outerHTML);
+      }
+      
+      // Pobierz kod do edycji
+      const codeElement = cell.querySelector('code');
+      if (codeElement) {
+        const originalCode = codeElement.textContent || codeElement.innerText;
+        
+        // Stwórz kontener dla edytora
+        const editorContainer = document.createElement('div');
+        editorContainer.className = 'code-editor-container';
+        
+        // Dodaj przyciski kontrolne
+        const controls = document.createElement('div');
+        controls.className = 'code-controls';
+        controls.innerHTML = `
+          <button class="run-btn" onclick="runCell(${index})">▶️ Run</button>
+          <button class="restart-btn" onclick="restartCell(${index})">↻ Restart</button>
+          <small style="color: #666;">Edytuj kod powyżej</small>
+        `;
+        
+        // Dodaj obszar na wyniki
+        const outputDiv = document.createElement('div');
+        outputDiv.className = 'code-output';
+        outputDiv.id = `output-${index}`;
+        outputDiv.textContent = 'Wyniki pojawią się tutaj po kliknięciu Run...';
+        outputDiv.style.color = '#6c757d';
+        
+        // Stwórz textarea dla CodeMirror
+        const textarea = document.createElement('textarea');
+        textarea.value = originalCode;
+        
+        editorContainer.appendChild(textarea);
+        editorContainer.appendChild(controls);
+        editorContainer.appendChild(outputDiv);
+        
+        // Zamień oryginalną komórkę na edytor
+        cell.parentNode.replaceChild(editorContainer, cell);
+        
+        // Inicjalizuj CodeMirror
+        const editor = CodeMirror.fromTextArea(textarea, {
+          mode: 'python',
+          lineNumbers: true,
+          theme: 'default',
+          autoCloseBrackets: true,
+          matchBrackets: true,
+          indentUnit: 4,
+          lineWrapping: true
+        });
+        
+        editors.set(index, editor);
+      }
+    });
+    
+    setTimeout(() => {
+      document.getElementById('edit-status').style.display = 'none';
+    }, 3000);
+  }
+  
+  function deactivateEditMode() {
+    console.log('Deactivating edit mode...');
+    editModeActive = false;
+    
+    // Przywróć oryginalne komórki z pełnym formatowaniem
+    document.querySelectorAll('.code-editor-container').forEach(function(container, index) {
+      if (originalCodeCells.has(index)) {
+        // Stwórz tymczasowy kontener do parsowania HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = originalCodeCells.get(index);
+        
+        // Pobierz element z pełnym formatowaniem
+        const restoredCell = tempDiv.firstElementChild;
+        
+        // Zamień kontener edytora na oryginalną komórkę
+        if (restoredCell) {
+          container.parentNode.replaceChild(restoredCell, container);
+        }
+      }
+    });
+    
+    // Wyczyść edytory
+    editors.clear();
+    
+    // Przywróć przycisk
+    document.getElementById('edit-mode-button').innerHTML = '<button class="btn btn-success" onclick="toggleEditMode()">✏️ Tryb Edycji</button>';
+    document.getElementById('edit-status').innerHTML = '<div class="alert alert-info">Tryb edycji wyłączony</div>';
+    document.getElementById('edit-status').style.display = 'block';
+    
+    setTimeout(() => {
+      document.getElementById('edit-status').style.display = 'none';
+    }, 2000);
+  }
+  
+  async function runCell(cellIndex) {
+    console.log('Running cell:', cellIndex);
+    const editor = editors.get(cellIndex);
+    const outputDiv = document.getElementById(`output-${cellIndex}`);
+    
+    if (editor && outputDiv) {
+      const code = editor.getValue();
+      
+      // Sprawdź czy kod nie jest pusty
+      if (!code.trim()) {
+        outputDiv.textContent = 'Brak kodu do uruchomienia';
+        outputDiv.className = 'code-output output-error';
+        return;
+      }
+      
+      // Sprawdź czy Pyodide jest gotowy
+      if (!pyodideReady) {
+        outputDiv.innerHTML = `
+          <div style="color: #dc3545; font-weight: bold;">⚠️ Python jeszcze się ładuje</div>
+          <div style="font-size: 12px; margin-top: 5px;">
+            Poczekaj chwilę i spróbuj ponownie...
+          </div>
+        `;
+        outputDiv.className = 'code-output output-error';
+        return;
+      }
+      
+      // Pokaż że kod się wykonuje
+      outputDiv.textContent = '🚀 Uruchamianie kodu Python...';
+      outputDiv.className = 'code-output';
+      
+      try {
+        // Przechwytuj output z print() - każda linia osobno
+        pyodide.runPython('import sys');
+        pyodide.runPython('from io import StringIO');
+        pyodide.runPython('old_stdout = sys.stdout');
+        pyodide.runPython('sys.stdout = captured_output = StringIO()');
+        
+        // Uruchom kod użytkownika
+        pyodide.runPython(code);
+        
+        // Pobierz output - każda linia osobno
+        pyodide.runPython('sys.stdout = old_stdout');
+        const output = pyodide.runPython('captured_output.getvalue()');
+        
+        // Wyświetl wyniki
+        if (output && output.trim()) {
+          outputDiv.textContent = output;
+          outputDiv.className = 'code-output output-success';
+        } else {
+          outputDiv.textContent = '✅ Kod wykonany pomyślnie (brak outputu)';
+          outputDiv.className = 'code-output output-success';
+        }
+        
+      } catch (error) {
+        console.error('Pyodide error:', error);
+        outputDiv.textContent = `❌ Błąd: ${error.message}`;
+        outputDiv.className = 'code-output output-error';
+      }
+    }
+  }
+  
+
+  function restartCell(cellIndex) {
+    console.log('Restarting cell:', cellIndex);
+    const editor = editors.get(cellIndex);
+    const outputDiv = document.getElementById(`output-${cellIndex}`);
+    
+    if (editor && originalCodeCells.has(cellIndex)) {
+      // Pobierz oryginalny kod
+      const originalCode = originalCodeCells.get(cellIndex);
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(originalCode, 'text/html');
+      const originalText = doc.querySelector('code').textContent || doc.querySelector('code').innerText;
+      
+      // Przywróć oryginalny kod w edytorze
+      editor.setValue(originalText);
+      
+      // Wyczyść output
+      if (outputDiv) {
+        outputDiv.textContent = 'Kod przywrócony do stanu oryginalnego';
+        outputDiv.className = 'code-output';
+        outputDiv.style.color = '#6c757d';
+      }
+    }
+  }
+  
+  // Upewnij się że kopiowanie zawsze działa
+  document.addEventListener('DOMContentLoaded', function() {
+    // Przywróć funkcjonalność kopiowania
+    document.querySelectorAll('.code-copy-button').forEach(function(btn) {
+      btn.style.display = 'block';
+      btn.style.visibility = 'visible';
+    });
+  });
+</script>
 
 
 

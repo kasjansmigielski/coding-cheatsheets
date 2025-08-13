@@ -2,9 +2,12 @@ project:
   type: website
   output-dir: docs
   resources: ["requirements.txt"]
+  render:
+    - "*.qmd"
+    - "!LIVE_CODE_SETUP.md"
 
 website:
-  title: "Coding Cheatsheets with Kasjan"
+  title: "Coding Cheatsheets"
   repo-url: https://github.com/kasjansmigielski/coding-cheatsheets
   repo-branch: main
   navbar:
@@ -31,20 +34,346 @@ format:
     code-line-numbers: false
     include-in-header:
       - text: |
-          <script src="https://unpkg.com/thebelab@latest"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/default.min.css">
+          <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+          <style>
+            /* Style dla edytora kodu */
+            .code-editor-container {
+              position: relative;
+              margin: 10px 0;
+            }
+            .CodeMirror {
+              border: 1px solid #ddd !important;
+              border-radius: 4px !important;
+              font-size: 14px !important;
+              min-height: 100px !important;
+            }
+            .code-controls {
+              margin: 5px 0;
+            }
+            .code-controls button {
+              margin-right: 5px;
+              padding: 4px 8px;
+              font-size: 12px;
+              border-radius: 3px;
+              border: 1px solid #ccc;
+              cursor: pointer;
+            }
+            .run-btn {
+              background-color: #28a745;
+              color: white;
+              border-color: #28a745;
+            }
+            .run-btn:hover {
+              background-color: #218838;
+            }
+
+            .restart-btn {
+              background-color: #ffc107;
+              color: #212529;
+              border-color: #ffc107;
+            }
+            .restart-btn:hover {
+              background-color: #e0a800;
+            }
+            .code-output {
+              background-color: #f8f9fa;
+              border: 1px solid #dee2e6;
+              border-radius: 4px;
+              padding: 10px;
+              margin: 5px 0;
+              font-family: monospace;
+              white-space: pre-wrap;
+              min-height: 30px;
+              max-height: 200px;
+              overflow-y: auto;
+            }
+            .output-success {
+              border-color: #28a745;
+              background-color: #d4edda;
+            }
+            .output-error {
+              border-color: #dc3545;
+              background-color: #f8d7da;
+              color: #721c24;
+            }
+          </style>
+    include-after-body:
+      - text: |
+          <div id="edit-mode-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <button class="btn btn-success" onclick="toggleEditMode()">✏️ Tryb Edycji</button>
+          </div>
+          <div id="edit-status" style="position: fixed; bottom: 70px; right: 20px; z-index: 1000; display: none;">
+            <div class="alert alert-info">Tryb edycji aktywny</div>
+          </div>
           <script>
-            thebelab.bootstrap({
-              requestKernel: true,
-              binderOptions: {
-                repo: "kasjansmigielski/coding-cheatsheets",
-                ref: "main"
-              },
-              kernelOptions: {
-                name: "python3"
-              },
-              codeMirrorConfig: {
-                theme: "default"
+            // Ukryj przycisk "Tryb Edycji" na określonych stronach
+            document.addEventListener('DOMContentLoaded', function() {
+              const path = window.location.pathname;
+              const shouldHideButton = path.includes('pandas-filtering') || 
+                                     path === '/' || 
+                                     path.includes('index.html') ||
+                                     path.includes('LIVE_CODE_SETUP');
+              
+              if (shouldHideButton) {
+                const editButton = document.getElementById('edit-mode-button');
+                if (editButton) {
+                  editButton.style.display = 'none';
+                }
               }
+            });
+          </script>
+          <script>
+            let originalCodeCells = new Map();
+            let editModeActive = false;
+            let editors = new Map();
+            let pyodide = null;
+            let pyodideReady = false;
+            
+            // Inicjalizuj Pyodide
+            async function initPyodide() {
+              if (pyodideReady) return;
+              
+              console.log('🐍 Ładowanie Pyodide...');
+              try {
+                pyodide = await loadPyodide({
+                  indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+                });
+                
+                // Załaduj podstawowe pakiety
+                console.log('📦 Ładowanie pandas i numpy...');
+                await pyodide.loadPackage(["numpy", "pandas"]);
+                
+                pyodideReady = true;
+                console.log('✅ Pyodide gotowy!');
+              } catch (error) {
+                console.error('❌ Błąd ładowania Pyodide:', error);
+              }
+            }
+            
+            function toggleEditMode() {
+              if (editModeActive) {
+                deactivateEditMode();
+              } else {
+                activateEditMode();
+              }
+            }
+            
+            async function activateEditMode() {
+              console.log('Activating edit mode...');
+              editModeActive = true;
+              
+              // Pokaż status ładowania
+              document.getElementById('edit-status').innerHTML = '<div class="alert alert-info">🐍 Ładowanie Python...</div>';
+              document.getElementById('edit-status').style.display = 'block';
+              document.getElementById('edit-mode-button').innerHTML = '<button class="btn btn-warning" onclick="toggleEditMode()">❌ Wyłącz Edycję</button>';
+              
+              // Inicjalizuj Pyodide
+              await initPyodide();
+              
+              // Zaktualizuj status
+              if (pyodideReady) {
+                document.getElementById('edit-status').innerHTML = '<div class="alert alert-success">✅ Python gotowy!</div>';
+              } else {
+                document.getElementById('edit-status').innerHTML = '<div class="alert alert-danger">❌ Błąd ładowania Python</div>';
+                setTimeout(() => document.getElementById('edit-status').style.display = 'none', 3000);
+                return;
+              }
+              
+              // Znajdź wszystkie komórki z kodem
+              document.querySelectorAll('.thebe .sourceCode.cell-code').forEach(function(cell, index) {
+                // Zapisz oryginalny kod wraz z pełnym HTML i klasami
+                if (!originalCodeCells.has(index)) {
+                  originalCodeCells.set(index, cell.outerHTML);
+                }
+                
+                // Pobierz kod do edycji
+                const codeElement = cell.querySelector('code');
+                if (codeElement) {
+                  const originalCode = codeElement.textContent || codeElement.innerText;
+                  
+                  // Stwórz kontener dla edytora
+                  const editorContainer = document.createElement('div');
+                  editorContainer.className = 'code-editor-container';
+                  
+                  // Dodaj przyciski kontrolne
+                  const controls = document.createElement('div');
+                  controls.className = 'code-controls';
+                  controls.innerHTML = `
+                    <button class="run-btn" onclick="runCell(${index})">▶️ Run</button>
+                    <button class="restart-btn" onclick="restartCell(${index})">↻ Restart</button>
+                    <small style="color: #666;">Edytuj kod powyżej</small>
+                  `;
+                  
+                  // Dodaj obszar na wyniki
+                  const outputDiv = document.createElement('div');
+                  outputDiv.className = 'code-output';
+                  outputDiv.id = `output-${index}`;
+                  outputDiv.textContent = 'Wyniki pojawią się tutaj po kliknięciu Run...';
+                  outputDiv.style.color = '#6c757d';
+                  
+                  // Stwórz textarea dla CodeMirror
+                  const textarea = document.createElement('textarea');
+                  textarea.value = originalCode;
+                  
+                  editorContainer.appendChild(textarea);
+                  editorContainer.appendChild(controls);
+                  editorContainer.appendChild(outputDiv);
+                  
+                  // Zamień oryginalną komórkę na edytor
+                  cell.parentNode.replaceChild(editorContainer, cell);
+                  
+                  // Inicjalizuj CodeMirror
+                  const editor = CodeMirror.fromTextArea(textarea, {
+                    mode: 'python',
+                    lineNumbers: true,
+                    theme: 'default',
+                    autoCloseBrackets: true,
+                    matchBrackets: true,
+                    indentUnit: 4,
+                    lineWrapping: true
+                  });
+                  
+                  editors.set(index, editor);
+                }
+              });
+              
+              setTimeout(() => {
+                document.getElementById('edit-status').style.display = 'none';
+              }, 3000);
+            }
+            
+            function deactivateEditMode() {
+              console.log('Deactivating edit mode...');
+              editModeActive = false;
+              
+              // Przywróć oryginalne komórki z pełnym formatowaniem
+              document.querySelectorAll('.code-editor-container').forEach(function(container, index) {
+                if (originalCodeCells.has(index)) {
+                  // Stwórz tymczasowy kontener do parsowania HTML
+                  const tempDiv = document.createElement('div');
+                  tempDiv.innerHTML = originalCodeCells.get(index);
+                  
+                  // Pobierz element z pełnym formatowaniem
+                  const restoredCell = tempDiv.firstElementChild;
+                  
+                  // Zamień kontener edytora na oryginalną komórkę
+                  if (restoredCell) {
+                    container.parentNode.replaceChild(restoredCell, container);
+                  }
+                }
+              });
+              
+              // Wyczyść edytory
+              editors.clear();
+              
+              // Przywróć przycisk
+              document.getElementById('edit-mode-button').innerHTML = '<button class="btn btn-success" onclick="toggleEditMode()">✏️ Tryb Edycji</button>';
+              document.getElementById('edit-status').innerHTML = '<div class="alert alert-info">Tryb edycji wyłączony</div>';
+              document.getElementById('edit-status').style.display = 'block';
+              
+              setTimeout(() => {
+                document.getElementById('edit-status').style.display = 'none';
+              }, 2000);
+            }
+            
+            async function runCell(cellIndex) {
+              console.log('Running cell:', cellIndex);
+              const editor = editors.get(cellIndex);
+              const outputDiv = document.getElementById(`output-${cellIndex}`);
+              
+              if (editor && outputDiv) {
+                const code = editor.getValue();
+                
+                // Sprawdź czy kod nie jest pusty
+                if (!code.trim()) {
+                  outputDiv.textContent = 'Brak kodu do uruchomienia';
+                  outputDiv.className = 'code-output output-error';
+                  return;
+                }
+                
+                // Sprawdź czy Pyodide jest gotowy
+                if (!pyodideReady) {
+                  outputDiv.innerHTML = `
+                    <div style="color: #dc3545; font-weight: bold;">⚠️ Python jeszcze się ładuje</div>
+                    <div style="font-size: 12px; margin-top: 5px;">
+                      Poczekaj chwilę i spróbuj ponownie...
+                    </div>
+                  `;
+                  outputDiv.className = 'code-output output-error';
+                  return;
+                }
+                
+                // Pokaż że kod się wykonuje
+                outputDiv.textContent = '🚀 Uruchamianie kodu Python...';
+                outputDiv.className = 'code-output';
+                
+                try {
+                  // Przechwytuj output z print() - każda linia osobno
+                  pyodide.runPython('import sys');
+                  pyodide.runPython('from io import StringIO');
+                  pyodide.runPython('old_stdout = sys.stdout');
+                  pyodide.runPython('sys.stdout = captured_output = StringIO()');
+                  
+                  // Uruchom kod użytkownika
+                  pyodide.runPython(code);
+                  
+                  // Pobierz output - każda linia osobno
+                  pyodide.runPython('sys.stdout = old_stdout');
+                  const output = pyodide.runPython('captured_output.getvalue()');
+                  
+                  // Wyświetl wyniki
+                  if (output && output.trim()) {
+                    outputDiv.textContent = output;
+                    outputDiv.className = 'code-output output-success';
+                  } else {
+                    outputDiv.textContent = '✅ Kod wykonany pomyślnie (brak outputu)';
+                    outputDiv.className = 'code-output output-success';
+                  }
+                  
+                } catch (error) {
+                  console.error('Pyodide error:', error);
+                  outputDiv.textContent = `❌ Błąd: ${error.message}`;
+                  outputDiv.className = 'code-output output-error';
+                }
+              }
+            }
+            
+
+            function restartCell(cellIndex) {
+              console.log('Restarting cell:', cellIndex);
+              const editor = editors.get(cellIndex);
+              const outputDiv = document.getElementById(`output-${cellIndex}`);
+              
+              if (editor && originalCodeCells.has(cellIndex)) {
+                // Pobierz oryginalny kod
+                const originalCode = originalCodeCells.get(cellIndex);
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(originalCode, 'text/html');
+                const originalText = doc.querySelector('code').textContent || doc.querySelector('code').innerText;
+                
+                // Przywróć oryginalny kod w edytorze
+                editor.setValue(originalText);
+                
+                // Wyczyść output
+                if (outputDiv) {
+                  outputDiv.textContent = 'Kod przywrócony do stanu oryginalnego';
+                  outputDiv.className = 'code-output';
+                  outputDiv.style.color = '#6c757d';
+                }
+              }
+            }
+            
+            // Upewnij się że kopiowanie zawsze działa
+            document.addEventListener('DOMContentLoaded', function() {
+              // Przywróć funkcjonalność kopiowania
+              document.querySelectorAll('.code-copy-button').forEach(function(btn) {
+                btn.style.display = 'block';
+                btn.style.visibility = 'visible';
+              });
             });
           </script>
 execute:

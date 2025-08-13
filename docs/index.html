@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome – Coding Cheatsheets with Kasjan</title>
+<title>Witaj na stronie! – Coding Cheatsheets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,22 +102,73 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://unpkg.com/thebelab@latest"></script>
-<script>
-  thebelab.bootstrap({
-    requestKernel: true,
-    binderOptions: {
-      repo: "kasjansmigielski/coding-cheatsheets",
-      ref: "main"
-    },
-    kernelOptions: {
-      name: "python3"
-    },
-    codeMirrorConfig: {
-      theme: "default"
-    }
-  });
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/default.min.css">
+<script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+<style>
+  /* Style dla edytora kodu */
+  .code-editor-container {
+    position: relative;
+    margin: 10px 0;
+  }
+  .CodeMirror {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    min-height: 100px !important;
+  }
+  .code-controls {
+    margin: 5px 0;
+  }
+  .code-controls button {
+    margin-right: 5px;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .run-btn {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
+  }
+  .run-btn:hover {
+    background-color: #218838;
+  }
+
+  .restart-btn {
+    background-color: #ffc107;
+    color: #212529;
+    border-color: #ffc107;
+  }
+  .restart-btn:hover {
+    background-color: #e0a800;
+  }
+  .code-output {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+    min-height: 30px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .output-success {
+    border-color: #28a745;
+    background-color: #d4edda;
+  }
+  .output-error {
+    border-color: #dc3545;
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+</style>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -131,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Coding Cheatsheets with Kasjan</span>
+    <span class="navbar-title">Coding Cheatsheets</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -175,9 +226,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#coding-cheatsheets" id="toc-coding-cheatsheets" class="nav-link active" data-scroll-target="#coding-cheatsheets">Coding Cheatsheets</a>
+  <li><a href="#coding-cheatsheets" id="toc-coding-cheatsheets" class="nav-link active" data-scroll-target="#coding-cheatsheets">💻 Coding Cheatsheets</a>
   <ul class="collapse">
-  <li><a href="#zacznij-tutaj" id="toc-zacznij-tutaj" class="nav-link" data-scroll-target="#zacznij-tutaj">Zacznij tutaj</a></li>
+  <li><a href="#co-znajdziesz-w-każdej-ściągawce" id="toc-co-znajdziesz-w-każdej-ściągawce" class="nav-link" data-scroll-target="#co-znajdziesz-w-każdej-ściągawce">🎯 Co znajdziesz w każdej ściągawce?</a></li>
+  <li><a href="#tryb-edycji---twój-kod-na-żywo" id="toc-tryb-edycji---twój-kod-na-żywo" class="nav-link" data-scroll-target="#tryb-edycji---twój-kod-na-żywo">✏️ Tryb Edycji - Twój kod na żywo!</a></li>
+  <li><a href="#dostępne-ściągi" id="toc-dostępne-ściągi" class="nav-link" data-scroll-target="#dostępne-ściągi">📚 Dostępne ściągi</a>
+  <ul class="collapse">
+  <li><a href="#podstawy-pythona" id="toc-podstawy-pythona" class="nav-link" data-scroll-target="#podstawy-pythona">Podstawy Pythona</a></li>
+  <li><a href="#pandas-analiza-danych" id="toc-pandas-analiza-danych" class="nav-link" data-scroll-target="#pandas-analiza-danych">Pandas &amp; Analiza Danych</a></li>
+  </ul></li>
+  <li><a href="#szybki-start" id="toc-szybki-start" class="nav-link" data-scroll-target="#szybki-start">🚀 Szybki start</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -187,7 +245,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Welcome</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Witaj na stronie!</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -205,17 +263,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="coding-cheatsheets" class="level1">
-<h1>Coding Cheatsheets</h1>
-<p>Szybkie, krótkie ściągi z Pythona i Pandas do utrwalenia podstaw. Każda karta ma 2–3 protipy i mini-zadanie.</p>
-<section id="zacznij-tutaj" class="level2">
-<h2 class="anchored" data-anchor-id="zacznij-tutaj">Zacznij tutaj</h2>
+<h1>💻 Coding Cheatsheets</h1>
+<p>Witaj w interaktywnej kolekcji ściąg z podstaw programowania! Znajdziesz tutaj <strong>krótkie, praktyczne protipsy</strong> z Pythona, Pandas i innych bibliotek, które pomogą Ci opanować najważniejsze techniki programistyczne.</p>
+<section id="co-znajdziesz-w-każdej-ściągawce" class="level2">
+<h2 class="anchored" data-anchor-id="co-znajdziesz-w-każdej-ściągawce">🎯 Co znajdziesz w każdej ściągawce?</h2>
 <ul>
-<li><a href="./cheatsheets/01-python-basics.html">Python Basics</a></li>
-<li><a href="./cheatsheets/02-pandas-filtering.html">Pandas Filtering</a></li>
+<li><strong>2-3 konkretne protipsy</strong> z wyjaśnieniami</li>
+<li><strong>Praktyczne przykłady kodu</strong> gotowe do kopiowania</li>
+<li><strong>Mini-zadania</strong> do samodzielnego rozwiązania</li>
+<li><strong>Interaktywny tryb edycji</strong> do eksperymentowania z kodem</li>
 </ul>
-<blockquote class="blockquote">
-<p>Tip: Kliknij ikonę <strong>Copy</strong> w prawym górnym rogu bloków kodu, żeby szybko wkleić do swojego notatnika.</p>
-</blockquote>
+</section>
+<section id="tryb-edycji---twój-kod-na-żywo" class="level2">
+<h2 class="anchored" data-anchor-id="tryb-edycji---twój-kod-na-żywo">✏️ Tryb Edycji - Twój kod na żywo!</h2>
+<p>Na większości stron zobaczysz przycisk <strong>“Tryb Edycji”</strong> w prawym dolnym rogu. Po jego kliknięciu:</p>
+<ul>
+<li>🔄 <strong>Edytuj kod bezpośrednio</strong> w przeglądarce</li>
+<li>▶️ <strong>Uruchamiaj kod na żywo</strong> i zobacz wyniki</li>
+<li>🔄 <strong>Eksperymentuj</strong> bez obaw - zawsze możesz wrócić do oryginału</li>
+<li>📚 <strong>Ucz się przez praktykę</strong> - najlepszy sposób na naukę programowania!</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Jak uruchomić tryb edycji?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Kliknij <strong>“✏️ Tryb Edycji”</strong> w prawym dolnym rogu</li>
+<li>Poczekaj aż Python się załaduje (około 10-15 sekund)</li>
+<li>Modyfikuj kod i klikaj <strong>“▶️ Run”</strong> aby zobaczyć wyniki!</li>
+</ol>
+<p><strong>Uwaga:</strong> Przy pierwszym uruchomieniu Python i pandas ładują się z internetu - to może potrwać chwilę.</p>
+</div>
+</div>
+</section>
+<section id="dostępne-ściągi" class="level2">
+<h2 class="anchored" data-anchor-id="dostępne-ściągi">📚 Dostępne ściągi</h2>
+<section id="podstawy-pythona" class="level3">
+<h3 class="anchored" data-anchor-id="podstawy-pythona">Podstawy Pythona</h3>
+<ul>
+<li><a href="./cheatsheets/01-python-basics.html"><strong>Python Basics</strong></a> - Zmienne, listy, pętle i funkcje</li>
+</ul>
+</section>
+<section id="pandas-analiza-danych" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-analiza-danych">Pandas &amp; Analiza Danych</h3>
+<ul>
+<li><a href="./cheatsheets/02-pandas-filtering.html"><strong>Pandas Filtering</strong></a> - Filtrowanie i selekcja danych</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+💡 Więcej ściąg wkrótce!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ta kolekcja będzie się rozrastać o nowe biblioteki i zaawansowane techniki. Śledź aktualizacje!</p>
+</div>
+</div>
+</section>
+</section>
+<section id="szybki-start" class="level2">
+<h2 class="anchored" data-anchor-id="szybki-start">🚀 Szybki start</h2>
+<ol type="1">
+<li><strong>Wybierz ściągę</strong> z listy powyżej</li>
+<li><strong>Przeczytaj protipsy</strong> i spróbuj zrozumieć przykłady<br>
+</li>
+<li><strong>Skopiuj kod</strong> (ikona Copy w prawym górnym rogu bloku)</li>
+<li><strong>Eksperymentuj</strong> używając trybu edycji</li>
+<li><strong>Rozwiąż mini-zadanie</strong> na końcu każdej strony</li>
+</ol>
+<hr>
+<p><strong>Miłej nauki!</strong> 🎓</p>
 
 
 <!-- -->
@@ -675,21 +801,338 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Welcome"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Witaj na stronie!"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> article</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Coding Cheatsheets</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># 💻 Coding Cheatsheets</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Szybkie, krótkie ściągi z Pythona i Pandas do utrwalenia podstaw. Każda karta ma 2–3 protipy i mini-zadanie.</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Witaj w interaktywnej kolekcji ściąg z podstaw programowania! Znajdziesz tutaj **krótkie, praktyczne protipsy** z Pythona, Pandas i innych bibliotek, które pomogą Ci opanować najważniejsze techniki programistyczne.</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Zacznij tutaj</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Python Basics</span><span class="co">](cheatsheets/01-python-basics.qmd)</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Pandas Filtering</span><span class="co">](cheatsheets/02-pandas-filtering.qmd)</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Tip: Kliknij ikonę **Copy** w prawym górnym rogu bloków kodu, żeby szybko wkleić do swojego notatnika.</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🎯 Co znajdziesz w każdej ściągawce?</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**2-3 konkretne protipsy** z wyjaśnieniami</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Praktyczne przykłady kodu** gotowe do kopiowania</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Mini-zadania** do samodzielnego rozwiązania</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Interaktywny tryb edycji** do eksperymentowania z kodem</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## ✏️ Tryb Edycji - Twój kod na żywo!</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Na większości stron zobaczysz przycisk **"Tryb Edycji"** w prawym dolnym rogu. Po jego kliknięciu:</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>🔄 **Edytuj kod bezpośrednio** w przeglądarce</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>▶️ **Uruchamiaj kod na żywo** i zobacz wyniki</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>🔄 **Eksperymentuj** bez obaw - zawsze możesz wrócić do oryginału</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>📚 **Ucz się przez praktykę** - najlepszy sposób na naukę programowania!</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>::: {.callout-tip}</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Jak uruchomić tryb edycji?</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Kliknij **"✏️ Tryb Edycji"** w prawym dolnym rogu</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Poczekaj aż Python się załaduje (około 10-15 sekund) </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Modyfikuj kod i klikaj **"▶️ Run"** aby zobaczyć wyniki!</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>**Uwaga:** Przy pierwszym uruchomieniu Python i pandas ładują się z internetu - to może potrwać chwilę.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## 📚 Dostępne ściągi</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### Podstawy Pythona</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">**Python Basics**</span><span class="co">](cheatsheets/01-python-basics.qmd)</span> - Zmienne, listy, pętle i funkcje</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pandas &amp; Analiza Danych  </span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">**Pandas Filtering**</span><span class="co">](cheatsheets/02-pandas-filtering.qmd)</span> - Filtrowanie i selekcja danych</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## 💡 Więcej ściąg wkrótce!</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Ta kolekcja będzie się rozrastać o nowe biblioteki i zaawansowane techniki. Śledź aktualizacje!</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 🚀 Szybki start</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Wybierz ściągę** z listy powyżej</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Przeczytaj protipsy** i spróbuj zrozumieć przykłady  </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Skopiuj kod** (ikona Copy w prawym górnym rogu bloku)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Eksperymentuj** używając trybu edycji</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Rozwiąż mini-zadanie** na końcu każdej strony</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>**Miłej nauki!** 🎓</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<div id="edit-mode-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+  <button class="btn btn-success" onclick="toggleEditMode()">✏️ Tryb Edycji</button>
+</div>
+<div id="edit-status" style="position: fixed; bottom: 70px; right: 20px; z-index: 1000; display: none;">
+  <div class="alert alert-info">Tryb edycji aktywny</div>
+</div>
+<script>
+  // Ukryj przycisk "Tryb Edycji" na określonych stronach
+  document.addEventListener('DOMContentLoaded', function() {
+    const path = window.location.pathname;
+    const shouldHideButton = path.includes('pandas-filtering') || 
+                           path === '/' || 
+                           path.includes('index.html') ||
+                           path.includes('LIVE_CODE_SETUP');
+    
+    if (shouldHideButton) {
+      const editButton = document.getElementById('edit-mode-button');
+      if (editButton) {
+        editButton.style.display = 'none';
+      }
+    }
+  });
+</script>
+<script>
+  let originalCodeCells = new Map();
+  let editModeActive = false;
+  let editors = new Map();
+  let pyodide = null;
+  let pyodideReady = false;
+  
+  // Inicjalizuj Pyodide
+  async function initPyodide() {
+    if (pyodideReady) return;
+    
+    console.log('🐍 Ładowanie Pyodide...');
+    try {
+      pyodide = await loadPyodide({
+        indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/"
+      });
+      
+      // Załaduj podstawowe pakiety
+      console.log('📦 Ładowanie pandas i numpy...');
+      await pyodide.loadPackage(["numpy", "pandas"]);
+      
+      pyodideReady = true;
+      console.log('✅ Pyodide gotowy!');
+    } catch (error) {
+      console.error('❌ Błąd ładowania Pyodide:', error);
+    }
+  }
+  
+  function toggleEditMode() {
+    if (editModeActive) {
+      deactivateEditMode();
+    } else {
+      activateEditMode();
+    }
+  }
+  
+  async function activateEditMode() {
+    console.log('Activating edit mode...');
+    editModeActive = true;
+    
+    // Pokaż status ładowania
+    document.getElementById('edit-status').innerHTML = '<div class="alert alert-info">🐍 Ładowanie Python...</div>';
+    document.getElementById('edit-status').style.display = 'block';
+    document.getElementById('edit-mode-button').innerHTML = '<button class="btn btn-warning" onclick="toggleEditMode()">❌ Wyłącz Edycję</button>';
+    
+    // Inicjalizuj Pyodide
+    await initPyodide();
+    
+    // Zaktualizuj status
+    if (pyodideReady) {
+      document.getElementById('edit-status').innerHTML = '<div class="alert alert-success">✅ Python gotowy!</div>';
+    } else {
+      document.getElementById('edit-status').innerHTML = '<div class="alert alert-danger">❌ Błąd ładowania Python</div>';
+      setTimeout(() => document.getElementById('edit-status').style.display = 'none', 3000);
+      return;
+    }
+    
+    // Znajdź wszystkie komórki z kodem
+    document.querySelectorAll('.thebe .sourceCode.cell-code').forEach(function(cell, index) {
+      // Zapisz oryginalny kod wraz z pełnym HTML i klasami
+      if (!originalCodeCells.has(index)) {
+        originalCodeCells.set(index, cell.outerHTML);
+      }
+      
+      // Pobierz kod do edycji
+      const codeElement = cell.querySelector('code');
+      if (codeElement) {
+        const originalCode = codeElement.textContent || codeElement.innerText;
+        
+        // Stwórz kontener dla edytora
+        const editorContainer = document.createElement('div');
+        editorContainer.className = 'code-editor-container';
+        
+        // Dodaj przyciski kontrolne
+        const controls = document.createElement('div');
+        controls.className = 'code-controls';
+        controls.innerHTML = `
+          <button class="run-btn" onclick="runCell(${index})">▶️ Run</button>
+          <button class="restart-btn" onclick="restartCell(${index})">↻ Restart</button>
+          <small style="color: #666;">Edytuj kod powyżej</small>
+        `;
+        
+        // Dodaj obszar na wyniki
+        const outputDiv = document.createElement('div');
+        outputDiv.className = 'code-output';
+        outputDiv.id = `output-${index}`;
+        outputDiv.textContent = 'Wyniki pojawią się tutaj po kliknięciu Run...';
+        outputDiv.style.color = '#6c757d';
+        
+        // Stwórz textarea dla CodeMirror
+        const textarea = document.createElement('textarea');
+        textarea.value = originalCode;
+        
+        editorContainer.appendChild(textarea);
+        editorContainer.appendChild(controls);
+        editorContainer.appendChild(outputDiv);
+        
+        // Zamień oryginalną komórkę na edytor
+        cell.parentNode.replaceChild(editorContainer, cell);
+        
+        // Inicjalizuj CodeMirror
+        const editor = CodeMirror.fromTextArea(textarea, {
+          mode: 'python',
+          lineNumbers: true,
+          theme: 'default',
+          autoCloseBrackets: true,
+          matchBrackets: true,
+          indentUnit: 4,
+          lineWrapping: true
+        });
+        
+        editors.set(index, editor);
+      }
+    });
+    
+    setTimeout(() => {
+      document.getElementById('edit-status').style.display = 'none';
+    }, 3000);
+  }
+  
+  function deactivateEditMode() {
+    console.log('Deactivating edit mode...');
+    editModeActive = false;
+    
+    // Przywróć oryginalne komórki z pełnym formatowaniem
+    document.querySelectorAll('.code-editor-container').forEach(function(container, index) {
+      if (originalCodeCells.has(index)) {
+        // Stwórz tymczasowy kontener do parsowania HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = originalCodeCells.get(index);
+        
+        // Pobierz element z pełnym formatowaniem
+        const restoredCell = tempDiv.firstElementChild;
+        
+        // Zamień kontener edytora na oryginalną komórkę
+        if (restoredCell) {
+          container.parentNode.replaceChild(restoredCell, container);
+        }
+      }
+    });
+    
+    // Wyczyść edytory
+    editors.clear();
+    
+    // Przywróć przycisk
+    document.getElementById('edit-mode-button').innerHTML = '<button class="btn btn-success" onclick="toggleEditMode()">✏️ Tryb Edycji</button>';
+    document.getElementById('edit-status').innerHTML = '<div class="alert alert-info">Tryb edycji wyłączony</div>';
+    document.getElementById('edit-status').style.display = 'block';
+    
+    setTimeout(() => {
+      document.getElementById('edit-status').style.display = 'none';
+    }, 2000);
+  }
+  
+  async function runCell(cellIndex) {
+    console.log('Running cell:', cellIndex);
+    const editor = editors.get(cellIndex);
+    const outputDiv = document.getElementById(`output-${cellIndex}`);
+    
+    if (editor && outputDiv) {
+      const code = editor.getValue();
+      
+      // Sprawdź czy kod nie jest pusty
+      if (!code.trim()) {
+        outputDiv.textContent = 'Brak kodu do uruchomienia';
+        outputDiv.className = 'code-output output-error';
+        return;
+      }
+      
+      // Sprawdź czy Pyodide jest gotowy
+      if (!pyodideReady) {
+        outputDiv.innerHTML = `
+          <div style="color: #dc3545; font-weight: bold;">⚠️ Python jeszcze się ładuje</div>
+          <div style="font-size: 12px; margin-top: 5px;">
+            Poczekaj chwilę i spróbuj ponownie...
+          </div>
+        `;
+        outputDiv.className = 'code-output output-error';
+        return;
+      }
+      
+      // Pokaż że kod się wykonuje
+      outputDiv.textContent = '🚀 Uruchamianie kodu Python...';
+      outputDiv.className = 'code-output';
+      
+      try {
+        // Przechwytuj output z print() - każda linia osobno
+        pyodide.runPython('import sys');
+        pyodide.runPython('from io import StringIO');
+        pyodide.runPython('old_stdout = sys.stdout');
+        pyodide.runPython('sys.stdout = captured_output = StringIO()');
+        
+        // Uruchom kod użytkownika
+        pyodide.runPython(code);
+        
+        // Pobierz output - każda linia osobno
+        pyodide.runPython('sys.stdout = old_stdout');
+        const output = pyodide.runPython('captured_output.getvalue()');
+        
+        // Wyświetl wyniki
+        if (output && output.trim()) {
+          outputDiv.textContent = output;
+          outputDiv.className = 'code-output output-success';
+        } else {
+          outputDiv.textContent = '✅ Kod wykonany pomyślnie (brak outputu)';
+          outputDiv.className = 'code-output output-success';
+        }
+        
+      } catch (error) {
+        console.error('Pyodide error:', error);
+        outputDiv.textContent = `❌ Błąd: ${error.message}`;
+        outputDiv.className = 'code-output output-error';
+      }
+    }
+  }
+  
+
+  function restartCell(cellIndex) {
+    console.log('Restarting cell:', cellIndex);
+    const editor = editors.get(cellIndex);
+    const outputDiv = document.getElementById(`output-${cellIndex}`);
+    
+    if (editor && originalCodeCells.has(cellIndex)) {
+      // Pobierz oryginalny kod
+      const originalCode = originalCodeCells.get(cellIndex);
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(originalCode, 'text/html');
+      const originalText = doc.querySelector('code').textContent || doc.querySelector('code').innerText;
+      
+      // Przywróć oryginalny kod w edytorze
+      editor.setValue(originalText);
+      
+      // Wyczyść output
+      if (outputDiv) {
+        outputDiv.textContent = 'Kod przywrócony do stanu oryginalnego';
+        outputDiv.className = 'code-output';
+        outputDiv.style.color = '#6c757d';
+      }
+    }
+  }
+  
+  // Upewnij się że kopiowanie zawsze działa
+  document.addEventListener('DOMContentLoaded', function() {
+    // Przywróć funkcjonalność kopiowania
+    document.querySelectorAll('.code-copy-button').forEach(function(btn) {
+      btn.style.display = 'block';
+      btn.style.visibility = 'visible';
+    });
+  });
+</script>
 
 
 
