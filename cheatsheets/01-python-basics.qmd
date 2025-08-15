@@ -1,5 +1,5 @@
 ---
-title: "Python Basics — 3 protipy"
+title: "Python Basics — 6 protipów"
 format:
   html:
     code-tools: true
@@ -50,3 +50,46 @@ fruits = ["apple", "banana", "cherry", "kiwi"]
 # lengths = [...]
 # lengths
 ```
+
+---
+
+## 4) Dictionary Comprehension — buduj słowniki efektywnie
+```{python}
+#| classes: thebe
+products = ["laptop", "mouse", "keyboard", "monitor"]
+prices = [2999, 59, 199, 899]
+product_dict = {product: price for product, price in zip(products, prices) if price < 1000}
+product_dict
+```
+
+**Protip:** Możesz też tworzyć słowniki z warunkami: `{k: v for k, v in items if condition}`.
+
+---
+
+## 5) f-strings — formatuj stringi czytelnie
+```{python}
+#| classes: thebe
+name = "Anna"
+age = 25
+score = 95.567
+# Stary sposób
+print("Nazywam się " + name + ", mam " + str(age) + " lat")
+# f-string way 🚀
+print(f"Nazywam się {name}, mam {age} lat i mój wynik to {score:.2f}")
+```
+
+**Dlaczego warto:** Czytelniejsze i szybsze niż `.format()` czy konkatenacja.
+
+---
+
+## 6) `collections.Counter` — licz elementy automatycznie
+```{python}
+#| classes: thebe
+from collections import Counter
+grades = ["A", "B", "A", "C", "B", "A", "B", "C", "A"]
+grade_counts = Counter(grades)
+print(grade_counts)
+print(f"Najczęstsza ocena: {grade_counts.most_common(1)[0][0]}")
+```
+
+**Data Science tip:** Idealne do analizy częstości kategorii w danych!

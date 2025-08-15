@@ -37,30 +37,51 @@
   {
     "objectID": "cheatsheets/01-python-basics.html",
     "href": "cheatsheets/01-python-basics.html",
-    "title": "Python Basics — 3 protipy",
+    "title": "Python Basics — 6 protipów",
     "section": "",
     "text": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, f in enumerate(fruits, start=1):\n    print(i, f)\n\n1 apple\n2 banana\n3 cherry\n\n\nDlaczego warto: zamiast ręcznie liczyć indeksy."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#enumerate-numeruj-elementy-w-pętli",
     "href": "cheatsheets/01-python-basics.html#enumerate-numeruj-elementy-w-pętli",
-    "title": "Python Basics — 3 protipy",
+    "title": "Python Basics — 6 protipów",
     "section": "",
     "text": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, f in enumerate(fruits, start=1):\n    print(i, f)\n\n1 apple\n2 banana\n3 cherry\n\n\nDlaczego warto: zamiast ręcznie liczyć indeksy."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#zip-paruj-listy-w-locie",
     "href": "cheatsheets/01-python-basics.html#zip-paruj-listy-w-locie",
-    "title": "Python Basics — 3 protipy",
+    "title": "Python Basics — 6 protipów",
     "section": "2) zip — paruj listy w locie",
     "text": "2) zip — paruj listy w locie\n\nnames = [\"Ala\", \"Bartek\", \"Cezary\"]\nscores = [84, 92, 78]\nfor name, score in zip(names, scores):\n    print(f\"{name}: {score}\")\n\nAla: 84\nBartek: 92\nCezary: 78\n\n\nProtip: list(zip(names, scores)) da listę krotek."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#list-comprehension-szybko-twórz-listy",
     "href": "cheatsheets/01-python-basics.html#list-comprehension-szybko-twórz-listy",
-    "title": "Python Basics — 3 protipy",
+    "title": "Python Basics — 6 protipów",
     "section": "3) List Comprehension — szybko twórz listy",
     "text": "3) List Comprehension — szybko twórz listy\n\nnums = [1, 2, 3, 4, 5]\nsquares_even = [x*x for x in nums if x % 2 == 0]\nsquares_even\n\n[4, 16]\n\n\n\n\nMini-zadanie ✅\nWygeneruj listę długości każdego napisu w fruits, ale tylko dla owoców o nazwie dłuższej niż 5 znaków.\n\n# TODO: uzupełnij list comprehension\nfruits = [\"apple\", \"banana\", \"cherry\", \"kiwi\"]\n# lengths = [...]\n# lengths"
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#dictionary-comprehension-buduj-słowniki-efektywnie",
+    "href": "cheatsheets/01-python-basics.html#dictionary-comprehension-buduj-słowniki-efektywnie",
+    "title": "Python Basics — 6 protipów",
+    "section": "4) Dictionary Comprehension — buduj słowniki efektywnie",
+    "text": "4) Dictionary Comprehension — buduj słowniki efektywnie\n\nproducts = [\"laptop\", \"mouse\", \"keyboard\", \"monitor\"]\nprices = [2999, 59, 199, 899]\nproduct_dict = {product: price for product, price in zip(products, prices) if price &lt; 1000}\nproduct_dict\n\n{'mouse': 59, 'keyboard': 199, 'monitor': 899}\n\n\nProtip: Możesz też tworzyć słowniki z warunkami: {k: v for k, v in items if condition}."
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#f-strings-formatuj-stringi-czytelnie",
+    "href": "cheatsheets/01-python-basics.html#f-strings-formatuj-stringi-czytelnie",
+    "title": "Python Basics — 6 protipów",
+    "section": "5) f-strings — formatuj stringi czytelnie",
+    "text": "5) f-strings — formatuj stringi czytelnie\n\nname = \"Anna\"\nage = 25\nscore = 95.567\n# Stary sposób\nprint(\"Nazywam się \" + name + \", mam \" + str(age) + \" lat\")\n# f-string way 🚀\nprint(f\"Nazywam się {name}, mam {age} lat i mój wynik to {score:.2f}\")\n\nNazywam się Anna, mam 25 lat\nNazywam się Anna, mam 25 lat i mój wynik to 95.57\n\n\nDlaczego warto: Czytelniejsze i szybsze niż .format() czy konkatenacja."
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#collections.counter-licz-elementy-automatycznie",
+    "href": "cheatsheets/01-python-basics.html#collections.counter-licz-elementy-automatycznie",
+    "title": "Python Basics — 6 protipów",
+    "section": "6) collections.Counter — licz elementy automatycznie",
+    "text": "6) collections.Counter — licz elementy automatycznie\n\nfrom collections import Counter\ngrades = [\"A\", \"B\", \"A\", \"C\", \"B\", \"A\", \"B\", \"C\", \"A\"]\ngrade_counts = Counter(grades)\nprint(grade_counts)\nprint(f\"Najczęstsza ocena: {grade_counts.most_common(1)[0][0]}\")\n\nCounter({'A': 4, 'B': 3, 'C': 2})\nNajczęstsza ocena: A\n\n\nData Science tip: Idealne do analizy częstości kategorii w danych!"
   },
   {
     "objectID": "cheatsheets/02-pandas-filtering.html",
