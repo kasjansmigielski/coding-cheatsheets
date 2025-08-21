@@ -1,0 +1,221 @@
+---
+title: "GitHub Workflow - Wypychanie zmian"
+format: 
+  html:
+    toc: true
+    code-copy: true
+    include-in-header:
+      - text: |
+          <style>
+          .cell[data-layout-align="default"] .cell-code { display: none !important; }
+          </style>
+---
+
+Kompletny przewodnik po procesie wypychania zmian na GitHub - od klonowania repozytorium po wysłanie zmian na serwer.
+
+## 🔄 Wizualizacja procesu
+
+Poniższy diagram pokazuje kompletny workflow od sklonowania repozytorium do wypchania zmian:
+
+```{mermaid}
+flowchart TD
+    A([Start]) --> B["Otwórz VS Code / Cursor"]
+    B --> C["Otwórz folder roboczy lokalnie<br/>np. my_project"]
+    C --> D["Otwórz terminal i wpisz:<br/>git clone https://github.com/<br/>twoj-nick-github/twoja-nazwa-projektu"]
+    D --> E{Klonowanie udane?}
+    E -->|Nie| X([Przerwij i daj znać mentorowi])
+    E -->|Tak| F["Repo sklonowane lokalnie"]
+    F --> G["Sprawdź: git branch<br/>oraz git status"]
+    G --> H{Pracujesz nad<br/>nowym taskiem?}
+    H -->|Tak| I["Utwórz gałąź:<br/>git checkout -b NAZWA_ZADANIA<br/>np. TASK-1-Kasjan"]
+    H -->|Nie| J["Zostań na gałęzi main"]
+    I --> K
+    J --> K
+    K["Dodaj lub zmień pliki"] --> L["git status<br/>pliki na czerwono"]
+    L --> M["Dodaj do indeksu GitHub:<br/>git add ."]
+    M --> N["git status<br/>pliki na zielono"]
+    N --> O["Zatwierdź zmiany:<br/>git commit -m 'Opis zmian'"]
+    O --> P{Czy to nowa gałąź?}
+    P -->|Tak| Q["git push -u origin<br/>NAZWA_GAŁĘZI"]
+    P -->|Nie| R["git push"]
+    Q --> S([Sprawdź pliki na GitHub])
+    R --> S([Sprawdź pliki na GitHub])
+```
+
+## 📝 Krok po kroku - wypychanie zmian
+
+### 1. Przygotowanie środowiska
+
+Zanim zaczniesz pracować z repozytorium, upewnij się że:
+
+```bash
+# Sprawdź czy masz zainstalowany Git
+git --version
+
+# Skonfiguruj Git (tylko przy pierwszym użyciu)
+git config --global user.name "Twoje Imię Nazwisko"
+git config --global user.email "twoj-email@example.com"
+```
+
+### 2. Klonowanie repozytorium
+
+```bash
+# Sklonuj repozytorium z GitHub
+git clone https://github.com/twoj-nick-github/twoja-nazwa-projektu.git
+
+# Przejdź do folderu projektu
+cd twoja-nazwa-projektu
+
+# Sprawdź status i dostępne gałęzie
+git status
+git branch -a
+```
+
+### 3. Praca z gałęziami
+
+#### Dla nowych zadań - utwórz nową gałąź:
+```bash
+# Utwórz i przełącz się na nową gałąź
+git checkout -b TASK-1-NazwaZadania
+
+# Sprawdź aktualną gałąź
+git branch
+```
+
+#### Dla istniejącego kodu - zostań na main:
+```bash
+# Upewnij się że jesteś na main
+git checkout main
+
+# Pobierz najnowsze zmiany
+git pull origin main
+```
+
+### 4. Wprowadzanie zmian
+
+Po wprowadzeniu zmian w plikach:
+
+```bash
+# Sprawdź które pliki zostały zmienione (czerwone = nieindeksowane)
+git status
+
+# Dodaj wszystkie zmiany do indeksu
+git add .
+
+# Sprawdź ponownie (zielone = gotowe do commit)
+git status
+
+# Alternatywnie - dodaj konkretne pliki
+git add nazwa-pliku.txt folder/inny-plik.py
+```
+
+### 5. Zatwierdzanie zmian (commit)
+
+```bash
+# Zatwierdź zmiany z opisem
+git commit -m "Dodano funkcję logowania użytkownika"
+
+# Sprawdź historię commitów
+git log --oneline
+```
+
+**💡 Dobre praktyki dla wiadomości commit:**
+- Pisz w trybie rozkazującym: "Dodaj", "Napraw", "Zaktualizuj"
+- Bądź konkretny: zamiast "poprawki" napisz "Napraw błąd walidacji email"
+- Ogranicz do 50 znaków w pierwszej linii
+
+### 6. Wypychanie na GitHub
+
+#### Dla nowej gałęzi:
+```bash
+# Wypchnij nową gałąź (z flagą -u dla upstream)
+git push -u origin NAZWA_GALEZI
+
+# Przykład
+git push -u origin TASK-1-LoginFunction
+```
+
+#### Dla istniejącej gałęzi:
+```bash
+# Wypchnij zmiany
+git push
+
+# Lub explicite
+git push origin main
+```
+
+### 7. Weryfikacja na GitHub
+
+Po wykonaniu `git push`:
+
+1. **Otwórz repozytorium na GitHub.com**
+2. **Sprawdź czy pliki zostały zaktualizowane**
+3. **Dla nowej gałęzi:** GitHub pokaże opcję "Compare & pull request"
+4. **Utwórz Pull Request** jeśli pracujesz w zespole
+
+## ⚠️ Najczęstsze problemy i rozwiązania
+
+### Problem: "Permission denied (publickey)"
+```bash
+# Sprawdź czy masz skonfigurowany SSH key
+ssh -T git@github.com
+
+# Lub użyj HTTPS zamiast SSH
+git remote set-url origin https://github.com/username/repo.git
+```
+
+### Problem: "Your branch is behind"
+```bash
+# Pobierz najnowsze zmiany
+git pull origin main
+
+# Rozwiąż konflikty jeśli wystąpią
+# Następnie wykonaj commit i push
+```
+
+### Problem: Przypadkowy commit na main zamiast na feature branch
+```bash
+# Cofnij ostatni commit (zachowaj zmiany)
+git reset --soft HEAD~1
+
+# Utwórz nową gałąź
+git checkout -b proper-feature-branch
+
+# Wykonaj commit ponownie
+git commit -m "Proper commit message"
+```
+
+## 🚀 Skróty i aliasy
+
+Dodaj te aliasy do `~/.gitconfig` dla szybszej pracy:
+
+```bash
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    cm = commit -m
+    ps = push
+    pl = pull
+    lg = log --oneline --graph --decorate --all
+```
+
+Użycie:
+```bash
+git st          # zamiast git status
+git co main     # zamiast git checkout main
+git cm "Fix"    # zamiast git commit -m "Fix"
+```
+
+## 📚 Następne kroki
+
+Po opanowaniu podstawowego workflow, warto nauczyć się:
+
+- **Pull Requests** - proces review kodu w zespole
+- **Merge vs Rebase** - różne strategie łączenia gałęzi
+- **Git Flow** - zaawansowany model pracy z gałęziami
+- **GitHub Actions** - automatyzacja CI/CD
+
+---
+
+*💡 **Protip:** Zawsze sprawdź `git status` przed wykonaniem jakiejkolwiek operacji Git. To pomoże Ci uniknąć niespodzianek!*

@@ -1,0 +1,206 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Python Basics — 6 protipów\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-tools: true\n",
+        "---\n",
+        "\n",
+        "## 1) `enumerate` — numeruj elementy w pętli"
+      ],
+      "id": "d2341d02"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "fruits = [\"apple\", \"banana\", \"cherry\"]\n",
+        "for i, f in enumerate(fruits, start=1):\n",
+        "    print(i, f)"
+      ],
+      "id": "0a309e33",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Dlaczego warto:** zamiast ręcznie liczyć indeksy.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 2) `zip` — paruj listy w locie"
+      ],
+      "id": "3b2bd4ef"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "names = [\"Ala\", \"Bartek\", \"Cezary\"]\n",
+        "scores = [84, 92, 78]\n",
+        "for name, score in zip(names, scores):\n",
+        "    print(f\"{name}: {score}\")"
+      ],
+      "id": "ec3e5e78",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Protip:** `list(zip(names, scores))` da listę krotek.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 3) List Comprehension — szybko twórz listy"
+      ],
+      "id": "08d45252"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "nums = [1, 2, 3, 4, 5]\n",
+        "squares_even = [x*x for x in nums if x % 2 == 0]\n",
+        "squares_even"
+      ],
+      "id": "672f8888",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "### Mini-zadanie ✅\n",
+        "Wygeneruj listę **długości** każdego napisu w `fruits`, ale **tylko** dla owoców o nazwie dłuższej niż 5 znaków."
+      ],
+      "id": "985087d4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "# TODO: uzupełnij list comprehension\n",
+        "fruits = [\"apple\", \"banana\", \"cherry\", \"kiwi\"]\n",
+        "# lengths = [...]\n",
+        "# lengths"
+      ],
+      "id": "3f6e8389",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "## 4) Dictionary Comprehension — buduj słowniki efektywnie"
+      ],
+      "id": "0c820892"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "products = [\"laptop\", \"mouse\", \"keyboard\", \"monitor\"]\n",
+        "prices = [2999, 59, 199, 899]\n",
+        "product_dict = {product: price for product, price in zip(products, prices) if price < 1000}\n",
+        "product_dict"
+      ],
+      "id": "e78963a3",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Protip:** Możesz też tworzyć słowniki z warunkami: `{k: v for k, v in items if condition}`.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 5) f-strings — formatuj stringi czytelnie"
+      ],
+      "id": "e92de43e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "name = \"Anna\"\n",
+        "age = 25\n",
+        "score = 95.567\n",
+        "# Stary sposób\n",
+        "print(\"Nazywam się \" + name + \", mam \" + str(age) + \" lat\")\n",
+        "# f-string way 🚀\n",
+        "print(f\"Nazywam się {name}, mam {age} lat i mój wynik to {score:.2f}\")"
+      ],
+      "id": "7c305b8c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Dlaczego warto:** Czytelniejsze i szybsze niż `.format()` czy konkatenacja.\n",
+        "\n",
+        "---\n",
+        "\n",
+        "## 6) `collections.Counter` — licz elementy automatycznie"
+      ],
+      "id": "af6c8dc6"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "from collections import Counter\n",
+        "grades = [\"A\", \"B\", \"A\", \"C\", \"B\", \"A\", \"B\", \"C\", \"A\"]\n",
+        "grade_counts = Counter(grades)\n",
+        "print(grade_counts)\n",
+        "print(f\"Najczęstsza ocena: {grade_counts.most_common(1)[0][0]}\")"
+      ],
+      "id": "197b8ddf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "**Data Science tip:** Idealne do analizy częstości kategorii w danych!"
+      ],
+      "id": "0c04d18b"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/opt/homebrew/Caskroom/mambaforge/base/envs/quarto-py/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

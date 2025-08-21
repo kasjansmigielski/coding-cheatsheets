@@ -1,0 +1,132 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Pandas — filtrowanie trzema sposobami\"\n",
+        "format:\n",
+        "  html:\n",
+        "    code-tools: true\n",
+        "---\n",
+        "\n",
+        "Załóżmy prosty DataFrame:"
+      ],
+      "id": "a9dfa711"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "import pandas as pd\n",
+        "\n",
+        "df = pd.DataFrame({\n",
+        "    \"city\": [\"WAW\",\"WRO\",\"KRK\",\"GDA\",\"POZ\"],\n",
+        "    \"temp\": [23, 25, 21, 19, 24],\n",
+        "    \"rain\": [False, True, False, True, False]\n",
+        "})\n",
+        "df"
+      ],
+      "id": "797fe9b1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 1) Filtrowanie maską bool (najczęstsze)"
+      ],
+      "id": "13f023c0"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "hot = df[\"temp\"] >= 23\n",
+        "df[hot]"
+      ],
+      "id": "6554bb57",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 2) `.query()` — czytelne warunki jako string"
+      ],
+      "id": "1c470c66"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "df.query(\"temp >= 23 and rain == False\")"
+      ],
+      "id": "fe22c727",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 3) `.loc` — jawnie po wierszach/kolumnach"
+      ],
+      "id": "f90cf2b3"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "df.loc[df[\"temp\"].ge(23) & ~df[\"rain\"], [\"city\", \"temp\"]]"
+      ],
+      "id": "1fb9375b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "### Mini-zadanie ✅\n",
+        "Wyfiltruj miasta, w których **nie pada** i temperatura jest **poniżej 24**, zwracając tylko kolumny `city` i `temp`."
+      ],
+      "id": "a00b1b1e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| classes: thebe\n",
+        "# TODO: napisz filtr na 2 różne sposoby (maską i .query())\n",
+        "# 1) maska bool:\n",
+        "# ...\n",
+        "\n",
+        "# 2) query():\n",
+        "# ..."
+      ],
+      "id": "33efb114",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/opt/homebrew/Caskroom/mambaforge/base/envs/quarto-py/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

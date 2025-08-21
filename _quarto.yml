@@ -20,6 +20,8 @@ website:
             href: cheatsheets/01-python-basics.qmd
           - text: "Pandas Filtering"
             href: cheatsheets/02-pandas-filtering.qmd
+          - text: "GitHub Workflow"
+            href: cheatsheets/03-github-workflow.qmd
 
 format:
   html:
@@ -381,3 +383,5 @@ execute:
   warning: false
   message: false
   freeze: auto
+  mermaid: 
+    echo: false

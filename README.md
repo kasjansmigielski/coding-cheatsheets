@@ -49,7 +49,8 @@ qpush
 ├── index.qmd             # Strona główna
 ├── cheatsheets/
 │   ├── 01-python-basics.qmd      # Python basics (z trybem edycji)
-│   └── 02-pandas-filtering.qmd   # Pandas filtering (tylko odczyt)
+│   ├── 02-pandas-filtering.qmd   # Pandas filtering (tylko odczyt)
+│   └── 03-github-workflow.qmd    # GitHub workflow (z diagramem Mermaid)
 ├── styles.css
 └── requirements.txt      # Python dependencies dla Pyodide
 ```
@@ -86,6 +87,7 @@ qpush  # alias render + commit + push
 
 **Tryb edycji (Pyodide) włączony domyślnie na:**
 - Python Basics ✅
+- GitHub Workflow ✅ (z diagramami Mermaid)
 - Inne nowe ściągi ✅
 
 **Tryb edycji wyłączony na:**

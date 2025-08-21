@@ -35,6 +35,34 @@
     "text": "Wybierz ściągę z listy powyżej\nPrzeczytaj protipsy i spróbuj zrozumieć przykłady\n\nSkopiuj kod (ikona Copy w prawym górnym rogu bloku)\nEksperymentuj używając trybu edycji\nRozwiąż mini-zadanie na końcu każdej strony\n\n\nMiłej nauki! 🎓"
   },
   {
+    "objectID": "cheatsheets/02-pandas-filtering.html",
+    "href": "cheatsheets/02-pandas-filtering.html",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "",
+    "text": "Załóżmy prosty DataFrame:\nimport pandas as pd\n\ndf = pd.DataFrame({\n    \"city\": [\"WAW\",\"WRO\",\"KRK\",\"GDA\",\"POZ\"],\n    \"temp\": [23, 25, 21, 19, 24],\n    \"rain\": [False, True, False, True, False]\n})\ndf\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n1\nWRO\n25\nTrue\n\n\n2\nKRK\n21\nFalse\n\n\n3\nGDA\n19\nTrue\n\n\n4\nPOZ\n24\nFalse"
+  },
+  {
+    "objectID": "cheatsheets/02-pandas-filtering.html#filtrowanie-maską-bool-najczęstsze",
+    "href": "cheatsheets/02-pandas-filtering.html#filtrowanie-maską-bool-najczęstsze",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "1) Filtrowanie maską bool (najczęstsze)",
+    "text": "1) Filtrowanie maską bool (najczęstsze)\n\nhot = df[\"temp\"] &gt;= 23\ndf[hot]\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n1\nWRO\n25\nTrue\n\n\n4\nPOZ\n24\nFalse"
+  },
+  {
+    "objectID": "cheatsheets/02-pandas-filtering.html#query-czytelne-warunki-jako-string",
+    "href": "cheatsheets/02-pandas-filtering.html#query-czytelne-warunki-jako-string",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "2) .query() — czytelne warunki jako string",
+    "text": "2) .query() — czytelne warunki jako string\n\ndf.query(\"temp &gt;= 23 and rain == False\")\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n4\nPOZ\n24\nFalse"
+  },
+  {
+    "objectID": "cheatsheets/02-pandas-filtering.html#loc-jawnie-po-wierszachkolumnach",
+    "href": "cheatsheets/02-pandas-filtering.html#loc-jawnie-po-wierszachkolumnach",
+    "title": "Pandas — filtrowanie trzema sposobami",
+    "section": "3) .loc — jawnie po wierszach/kolumnach",
+    "text": "3) .loc — jawnie po wierszach/kolumnach\n\ndf.loc[df[\"temp\"].ge(23) & ~df[\"rain\"], [\"city\", \"temp\"]]\n\n\n\n\n\n\n\n\ncity\ntemp\n\n\n\n\n0\nWAW\n23\n\n\n4\nPOZ\n24\n\n\n\n\n\n\n\n\n\nMini-zadanie ✅\nWyfiltruj miasta, w których nie pada i temperatura jest poniżej 24, zwracając tylko kolumny city i temp.\n\n# TODO: napisz filtr na 2 różne sposoby (maską i .query())\n# 1) maska bool:\n# ...\n\n# 2) query():\n# ..."
+  },
+  {
     "objectID": "cheatsheets/01-python-basics.html",
     "href": "cheatsheets/01-python-basics.html",
     "title": "Python Basics — 6 protipów",
@@ -84,31 +112,45 @@
     "text": "6) collections.Counter — licz elementy automatycznie\n\nfrom collections import Counter\ngrades = [\"A\", \"B\", \"A\", \"C\", \"B\", \"A\", \"B\", \"C\", \"A\"]\ngrade_counts = Counter(grades)\nprint(grade_counts)\nprint(f\"Najczęstsza ocena: {grade_counts.most_common(1)[0][0]}\")\n\nCounter({'A': 4, 'B': 3, 'C': 2})\nNajczęstsza ocena: A\n\n\nData Science tip: Idealne do analizy częstości kategorii w danych!"
   },
   {
-    "objectID": "cheatsheets/02-pandas-filtering.html",
-    "href": "cheatsheets/02-pandas-filtering.html",
-    "title": "Pandas — filtrowanie trzema sposobami",
+    "objectID": "cheatsheets/03-github-workflow.html",
+    "href": "cheatsheets/03-github-workflow.html",
+    "title": "GitHub Workflow - Wypychanie zmian",
     "section": "",
-    "text": "Załóżmy prosty DataFrame:\nimport pandas as pd\n\ndf = pd.DataFrame({\n    \"city\": [\"WAW\",\"WRO\",\"KRK\",\"GDA\",\"POZ\"],\n    \"temp\": [23, 25, 21, 19, 24],\n    \"rain\": [False, True, False, True, False]\n})\ndf\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n1\nWRO\n25\nTrue\n\n\n2\nKRK\n21\nFalse\n\n\n3\nGDA\n19\nTrue\n\n\n4\nPOZ\n24\nFalse"
+    "text": "Kompletny przewodnik po procesie wypychania zmian na GitHub - od klonowania repozytorium po wysłanie zmian na serwer."
   },
   {
-    "objectID": "cheatsheets/02-pandas-filtering.html#filtrowanie-maską-bool-najczęstsze",
-    "href": "cheatsheets/02-pandas-filtering.html#filtrowanie-maską-bool-najczęstsze",
-    "title": "Pandas — filtrowanie trzema sposobami",
-    "section": "1) Filtrowanie maską bool (najczęstsze)",
-    "text": "1) Filtrowanie maską bool (najczęstsze)\n\nhot = df[\"temp\"] &gt;= 23\ndf[hot]\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n1\nWRO\n25\nTrue\n\n\n4\nPOZ\n24\nFalse"
+    "objectID": "cheatsheets/03-github-workflow.html#wizualizacja-procesu",
+    "href": "cheatsheets/03-github-workflow.html#wizualizacja-procesu",
+    "title": "GitHub Workflow - Wypychanie zmian",
+    "section": "🔄 Wizualizacja procesu",
+    "text": "🔄 Wizualizacja procesu\nPoniższy diagram pokazuje kompletny workflow od sklonowania repozytorium do wypchania zmian:\n\nflowchart TD\n    A([Start]) --&gt; B[\"Otwórz VS Code / Cursor\"]\n    B --&gt; C[\"Otwórz folder roboczy lokalnie&lt;br/&gt;np. my_project\"]\n    C --&gt; D[\"Otwórz terminal i wpisz:&lt;br/&gt;git clone https://github.com/&lt;br/&gt;twoj-nick-github/twoja-nazwa-projektu\"]\n    D --&gt; E{Klonowanie udane?}\n    E --&gt;|Nie| X([Przerwij i daj znać mentorowi])\n    E --&gt;|Tak| F[\"Repo sklonowane lokalnie\"]\n    F --&gt; G[\"Sprawdź: git branch&lt;br/&gt;oraz git status\"]\n    G --&gt; H{Pracujesz nad&lt;br/&gt;nowym taskiem?}\n    H --&gt;|Tak| I[\"Utwórz gałąź:&lt;br/&gt;git checkout -b NAZWA_ZADANIA&lt;br/&gt;np. TASK-1-Kasjan\"]\n    H --&gt;|Nie| J[\"Zostań na gałęzi main\"]\n    I --&gt; K\n    J --&gt; K\n    K[\"Dodaj lub zmień pliki\"] --&gt; L[\"git status&lt;br/&gt;pliki na czerwono\"]\n    L --&gt; M[\"Dodaj do indeksu GitHub:&lt;br/&gt;git add .\"]\n    M --&gt; N[\"git status&lt;br/&gt;pliki na zielono\"]\n    N --&gt; O[\"Zatwierdź zmiany:&lt;br/&gt;git commit -m 'Opis zmian'\"]\n    O --&gt; P{Czy to nowa gałąź?}\n    P --&gt;|Tak| Q[\"git push -u origin&lt;br/&gt;NAZWA_GAŁĘZI\"]\n    P --&gt;|Nie| R[\"git push\"]\n    Q --&gt; S([Sprawdź pliki na GitHub])\n    R --&gt; S([Sprawdź pliki na GitHub])\n\n\n\n\nflowchart TD\n    A([Start]) --&gt; B[\"Otwórz VS Code / Cursor\"]\n    B --&gt; C[\"Otwórz folder roboczy lokalnie&lt;br/&gt;np. my_project\"]\n    C --&gt; D[\"Otwórz terminal i wpisz:&lt;br/&gt;git clone https://github.com/&lt;br/&gt;twoj-nick-github/twoja-nazwa-projektu\"]\n    D --&gt; E{Klonowanie udane?}\n    E --&gt;|Nie| X([Przerwij i daj znać mentorowi])\n    E --&gt;|Tak| F[\"Repo sklonowane lokalnie\"]\n    F --&gt; G[\"Sprawdź: git branch&lt;br/&gt;oraz git status\"]\n    G --&gt; H{Pracujesz nad&lt;br/&gt;nowym taskiem?}\n    H --&gt;|Tak| I[\"Utwórz gałąź:&lt;br/&gt;git checkout -b NAZWA_ZADANIA&lt;br/&gt;np. TASK-1-Kasjan\"]\n    H --&gt;|Nie| J[\"Zostań na gałęzi main\"]\n    I --&gt; K\n    J --&gt; K\n    K[\"Dodaj lub zmień pliki\"] --&gt; L[\"git status&lt;br/&gt;pliki na czerwono\"]\n    L --&gt; M[\"Dodaj do indeksu GitHub:&lt;br/&gt;git add .\"]\n    M --&gt; N[\"git status&lt;br/&gt;pliki na zielono\"]\n    N --&gt; O[\"Zatwierdź zmiany:&lt;br/&gt;git commit -m 'Opis zmian'\"]\n    O --&gt; P{Czy to nowa gałąź?}\n    P --&gt;|Tak| Q[\"git push -u origin&lt;br/&gt;NAZWA_GAŁĘZI\"]\n    P --&gt;|Nie| R[\"git push\"]\n    Q --&gt; S([Sprawdź pliki na GitHub])\n    R --&gt; S([Sprawdź pliki na GitHub])"
   },
   {
-    "objectID": "cheatsheets/02-pandas-filtering.html#query-czytelne-warunki-jako-string",
-    "href": "cheatsheets/02-pandas-filtering.html#query-czytelne-warunki-jako-string",
-    "title": "Pandas — filtrowanie trzema sposobami",
-    "section": "2) .query() — czytelne warunki jako string",
-    "text": "2) .query() — czytelne warunki jako string\n\ndf.query(\"temp &gt;= 23 and rain == False\")\n\n\n\n\n\n\n\n\ncity\ntemp\nrain\n\n\n\n\n0\nWAW\n23\nFalse\n\n\n4\nPOZ\n24\nFalse"
+    "objectID": "cheatsheets/03-github-workflow.html#krok-po-kroku---wypychanie-zmian",
+    "href": "cheatsheets/03-github-workflow.html#krok-po-kroku---wypychanie-zmian",
+    "title": "GitHub Workflow - Wypychanie zmian",
+    "section": "📝 Krok po kroku - wypychanie zmian",
+    "text": "📝 Krok po kroku - wypychanie zmian\n\n1. Przygotowanie środowiska\nZanim zaczniesz pracować z repozytorium, upewnij się że:\n# Sprawdź czy masz zainstalowany Git\ngit --version\n\n# Skonfiguruj Git (tylko przy pierwszym użyciu)\ngit config --global user.name \"Twoje Imię Nazwisko\"\ngit config --global user.email \"twoj-email@example.com\"\n\n\n2. Klonowanie repozytorium\n# Sklonuj repozytorium z GitHub\ngit clone https://github.com/twoj-nick-github/twoja-nazwa-projektu.git\n\n# Przejdź do folderu projektu\ncd twoja-nazwa-projektu\n\n# Sprawdź status i dostępne gałęzie\ngit status\ngit branch -a\n\n\n3. Praca z gałęziami\n\nDla nowych zadań - utwórz nową gałąź:\n# Utwórz i przełącz się na nową gałąź\ngit checkout -b TASK-1-NazwaZadania\n\n# Sprawdź aktualną gałąź\ngit branch\n\n\nDla istniejącego kodu - zostań na main:\n# Upewnij się że jesteś na main\ngit checkout main\n\n# Pobierz najnowsze zmiany\ngit pull origin main\n\n\n\n4. Wprowadzanie zmian\nPo wprowadzeniu zmian w plikach:\n# Sprawdź które pliki zostały zmienione (czerwone = nieindeksowane)\ngit status\n\n# Dodaj wszystkie zmiany do indeksu\ngit add .\n\n# Sprawdź ponownie (zielone = gotowe do commit)\ngit status\n\n# Alternatywnie - dodaj konkretne pliki\ngit add nazwa-pliku.txt folder/inny-plik.py\n\n\n5. Zatwierdzanie zmian (commit)\n# Zatwierdź zmiany z opisem\ngit commit -m \"Dodano funkcję logowania użytkownika\"\n\n# Sprawdź historię commitów\ngit log --oneline\n💡 Dobre praktyki dla wiadomości commit: - Pisz w trybie rozkazującym: “Dodaj”, “Napraw”, “Zaktualizuj” - Bądź konkretny: zamiast “poprawki” napisz “Napraw błąd walidacji email” - Ogranicz do 50 znaków w pierwszej linii\n\n\n6. Wypychanie na GitHub\n\nDla nowej gałęzi:\n# Wypchnij nową gałąź (z flagą -u dla upstream)\ngit push -u origin NAZWA_GALEZI\n\n# Przykład\ngit push -u origin TASK-1-LoginFunction\n\n\nDla istniejącej gałęzi:\n# Wypchnij zmiany\ngit push\n\n# Lub explicite\ngit push origin main\n\n\n\n7. Weryfikacja na GitHub\nPo wykonaniu git push:\n\nOtwórz repozytorium na GitHub.com\nSprawdź czy pliki zostały zaktualizowane\nDla nowej gałęzi: GitHub pokaże opcję “Compare & pull request”\nUtwórz Pull Request jeśli pracujesz w zespole"
   },
   {
-    "objectID": "cheatsheets/02-pandas-filtering.html#loc-jawnie-po-wierszachkolumnach",
-    "href": "cheatsheets/02-pandas-filtering.html#loc-jawnie-po-wierszachkolumnach",
-    "title": "Pandas — filtrowanie trzema sposobami",
-    "section": "3) .loc — jawnie po wierszach/kolumnach",
-    "text": "3) .loc — jawnie po wierszach/kolumnach\n\ndf.loc[df[\"temp\"].ge(23) & ~df[\"rain\"], [\"city\", \"temp\"]]\n\n\n\n\n\n\n\n\ncity\ntemp\n\n\n\n\n0\nWAW\n23\n\n\n4\nPOZ\n24\n\n\n\n\n\n\n\n\n\nMini-zadanie ✅\nWyfiltruj miasta, w których nie pada i temperatura jest poniżej 24, zwracając tylko kolumny city i temp.\n\n# TODO: napisz filtr na 2 różne sposoby (maską i .query())\n# 1) maska bool:\n# ...\n\n# 2) query():\n# ..."
+    "objectID": "cheatsheets/03-github-workflow.html#najczęstsze-problemy-i-rozwiązania",
+    "href": "cheatsheets/03-github-workflow.html#najczęstsze-problemy-i-rozwiązania",
+    "title": "GitHub Workflow - Wypychanie zmian",
+    "section": "⚠️ Najczęstsze problemy i rozwiązania",
+    "text": "⚠️ Najczęstsze problemy i rozwiązania\n\nProblem: “Permission denied (publickey)”\n# Sprawdź czy masz skonfigurowany SSH key\nssh -T git@github.com\n\n# Lub użyj HTTPS zamiast SSH\ngit remote set-url origin https://github.com/username/repo.git\n\n\nProblem: “Your branch is behind”\n# Pobierz najnowsze zmiany\ngit pull origin main\n\n# Rozwiąż konflikty jeśli wystąpią\n# Następnie wykonaj commit i push\n\n\nProblem: Przypadkowy commit na main zamiast na feature branch\n# Cofnij ostatni commit (zachowaj zmiany)\ngit reset --soft HEAD~1\n\n# Utwórz nową gałąź\ngit checkout -b proper-feature-branch\n\n# Wykonaj commit ponownie\ngit commit -m \"Proper commit message\""
+  },
+  {
+    "objectID": "cheatsheets/03-github-workflow.html#skróty-i-aliasy",
+    "href": "cheatsheets/03-github-workflow.html#skróty-i-aliasy",
+    "title": "GitHub Workflow - Wypychanie zmian",
+    "section": "🚀 Skróty i aliasy",
+    "text": "🚀 Skróty i aliasy\nDodaj te aliasy do ~/.gitconfig dla szybszej pracy:\n[alias]\n    st = status\n    co = checkout\n    br = branch\n    cm = commit -m\n    ps = push\n    pl = pull\n    lg = log --oneline --graph --decorate --all\nUżycie:\ngit st          # zamiast git status\ngit co main     # zamiast git checkout main\ngit cm \"Fix\"    # zamiast git commit -m \"Fix\""
+  },
+  {
+    "objectID": "cheatsheets/03-github-workflow.html#następne-kroki",
+    "href": "cheatsheets/03-github-workflow.html#następne-kroki",
+    "title": "GitHub Workflow - Wypychanie zmian",
+    "section": "📚 Następne kroki",
+    "text": "📚 Następne kroki\nPo opanowaniu podstawowego workflow, warto nauczyć się:\n\nPull Requests - proces review kodu w zespole\nMerge vs Rebase - różne strategie łączenia gałęzi\nGit Flow - zaawansowany model pracy z gałęziami\nGitHub Actions - automatyzacja CI/CD\n\n\n💡 Protip: Zawsze sprawdź git status przed wykonaniem jakiejkolwiek operacji Git. To pomoże Ci uniknąć niespodzianek!"
   }
 ]
