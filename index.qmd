@@ -5,7 +5,7 @@ page-layout: article
 
 # 💻 Coding Cheatsheets
 
-Witaj w interaktywnej kolekcji ściąg z podstaw programowania! Znajdziesz tutaj **krótkie, praktyczne protipsy** z Pythona, Pandas i innych bibliotek, które pomogą Ci opanować najważniejsze techniki programistyczne.
+Witaj w interaktywnej kolekcji ściąg z podstaw programowania! Znajdziesz tutaj **krótkie, praktyczne protipsy** z Pythona, Pandas, GitHub i innych bibliotek, które pomogą Ci opanować najważniejsze techniki programistyczne.
 
 ## 🎯 Co znajdziesz w każdej ściągawce?
 
@@ -39,6 +39,9 @@ Na większości stron zobaczysz przycisk **"Tryb Edycji"** w prawym dolnym rogu.
 
 ### Pandas & Analiza Danych  
 - [**Pandas Filtering**](cheatsheets/02-pandas-filtering.qmd) - Filtrowanie i selekcja danych
+
+### GitHub Workflow  
+- [**GitHub Workflow**](cheatsheets/03-github-workflow.qmd) - Wypychanie zmian do repozytorium
 
 ::: {.callout-note}
 ## 💡 Więcej ściąg wkrótce!
