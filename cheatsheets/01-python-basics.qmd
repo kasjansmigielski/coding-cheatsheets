@@ -1,5 +1,5 @@
 ---
-title: "Python Basics — 6 protipów"
+title: "Python Basics — 9 protipów"
 format:
   html:
     code-tools: true
@@ -93,3 +93,100 @@ print(f"Najczęstsza ocena: {grade_counts.most_common(1)[0][0]}")
 ```
 
 **Data Science tip:** Idealne do analizy częstości kategorii w danych!
+
+---
+
+## 7) `*args` i `**kwargs` — elastyczne funkcje
+```{python}
+#| classes: thebe
+def smart_print(*args, **kwargs):
+    separator = kwargs.get('sep', ' | ')
+    prefix = kwargs.get('prefix', '>>> ')
+    print(prefix + separator.join(str(arg) for arg in args))
+
+# Różne sposoby wywołania
+smart_print("Python", "jest", "super")
+smart_print("A", "B", "C", sep=" -> ", prefix="WYNIK: ")
+smart_print(1, 2, 3, 4, 5, sep=", ")
+```
+
+**Dlaczego warto:** Funkcje mogą przyjmować dowolną liczbę argumentów pozycyjnych (`*args`) i nazwanych (`**kwargs`).
+
+---
+
+## 8) `defaultdict` — słowniki z domyślnymi wartościami
+```{python}
+#| classes: thebe
+from collections import defaultdict
+
+# Standardowy słownik - trzeba sprawdzać klucze
+normal_dict = {}
+# if 'python' not in normal_dict:
+#     normal_dict['python'] = []
+# normal_dict['python'].append('awesome')
+
+# defaultdict - automatyczne wartości domyślne
+courses = defaultdict(list)
+courses['python'].append('basics')
+courses['python'].append('advanced')
+courses['javascript'].append('react')
+
+print(dict(courses))  # Konwersja do normalnego dict dla czytelności
+```
+
+**Protip:** `defaultdict(int)` dla liczników, `defaultdict(list)` dla grup, `defaultdict(set)` dla unikalnych wartości.
+
+---
+
+## 9) `any()` i `all()` — sprawdzaj warunki w kolekcjach
+```{python}
+#| classes: thebe
+numbers = [2, 4, 6, 8, 10]
+mixed_numbers = [1, 2, 3, 4, 5]
+empty_list = []
+
+# Czy wszystkie elementy są parzyste?
+print(f"Wszystkie parzyste w {numbers}: {all(n % 2 == 0 for n in numbers)}")
+print(f"Wszystkie parzyste w {mixed_numbers}: {all(n % 2 == 0 for n in mixed_numbers)}")
+
+# Czy którykolwiek element jest większy niż 5?
+print(f"Jakiś > 5 w {numbers}: {any(n > 5 for n in numbers)}")
+print(f"Jakiś > 5 w {mixed_numbers}: {any(n > 5 for n in mixed_numbers)}")
+
+# Edge case - pusta lista
+print(f"all([]) = {all(empty_list)}")  # True (bo nie ma elementów fałszywych)
+print(f"any([]) = {any(empty_list)}")  # False (bo nie ma elementów prawdziwych)
+```
+
+**Data Science tip:** Świetne do walidacji danych - `all(df['age'] > 0)` sprawdzi czy każdy wiek jest dodatni!
+
+---
+
+### Finalne wyzwanie 🏆
+Stwórz funkcję `analyze_grades(grades_list)`, która:
+
+1. Przyjmuje listę ocen (stringi: "A", "B", "C", "D", "F")
+2. Zwraca słownik z informacjami:
+   - `counts`: liczba każdej oceny (użyj `Counter`)
+   - `has_failing`: czy są oceny F (użyj `any()`)
+   - `all_passing`: czy wszystkie oceny to A-D (użyj `all()`)
+   - `top_grade`: najczęstsza ocena
+
+```{python}
+#| classes: thebe
+from collections import Counter
+
+def analyze_grades(grades_list):
+    # TODO: Uzupełnij funkcję
+    # counts = ...
+    # has_failing = ...
+    # all_passing = ...
+    # top_grade = ...
+    # return {...}
+    pass
+
+# Test
+test_grades = ["A", "B", "A", "C", "B", "A", "D", "C", "A"]
+# result = analyze_grades(test_grades)
+# print(result)
+```

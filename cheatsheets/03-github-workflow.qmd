@@ -7,7 +7,7 @@ format:
     include-in-header:
       - text: |
           <style>
-          .cell[data-layout-align="default"] .cell-code { display: none !important; }
+          .cell[data-layout-align="default"] .sourceCode.cell-code[id="cb1"] { display: none !important; }
           </style>
 ---
 
@@ -91,6 +91,11 @@ git checkout main
 git pull origin main
 ```
 
+**🔥 Ważne!**
+
+- Przystępując do pracy z kodem - **zawsze pobierz najnowsze zmiany z repo**
+
+
 ### 4. Wprowadzanie zmian
 
 Po wprowadzeniu zmian w plikach:
@@ -120,9 +125,11 @@ git log --oneline
 ```
 
 **💡 Dobre praktyki dla wiadomości commit:**
-- Pisz w trybie rozkazującym: "Dodaj", "Napraw", "Zaktualizuj"
+
+- Do członków zespołu - pisz w trybie rozkazującym: "Dodaj", "Napraw", "Zaktualizuj"
 - Bądź konkretny: zamiast "poprawki" napisz "Napraw błąd walidacji email"
 - Ogranicz do 50 znaków w pierwszej linii
+- Niech każdy opis commita będzie powiązany z faktyczną zmianą w kodzie
 
 ### 6. Wypychanie na GitHub
 

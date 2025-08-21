@@ -65,51 +65,72 @@
   {
     "objectID": "cheatsheets/01-python-basics.html",
     "href": "cheatsheets/01-python-basics.html",
-    "title": "Python Basics — 6 protipów",
+    "title": "Python Basics — 9 protipów",
     "section": "",
     "text": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, f in enumerate(fruits, start=1):\n    print(i, f)\n\n1 apple\n2 banana\n3 cherry\n\n\nDlaczego warto: zamiast ręcznie liczyć indeksy."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#enumerate-numeruj-elementy-w-pętli",
     "href": "cheatsheets/01-python-basics.html#enumerate-numeruj-elementy-w-pętli",
-    "title": "Python Basics — 6 protipów",
+    "title": "Python Basics — 9 protipów",
     "section": "",
     "text": "fruits = [\"apple\", \"banana\", \"cherry\"]\nfor i, f in enumerate(fruits, start=1):\n    print(i, f)\n\n1 apple\n2 banana\n3 cherry\n\n\nDlaczego warto: zamiast ręcznie liczyć indeksy."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#zip-paruj-listy-w-locie",
     "href": "cheatsheets/01-python-basics.html#zip-paruj-listy-w-locie",
-    "title": "Python Basics — 6 protipów",
+    "title": "Python Basics — 9 protipów",
     "section": "2) zip — paruj listy w locie",
     "text": "2) zip — paruj listy w locie\n\nnames = [\"Ala\", \"Bartek\", \"Cezary\"]\nscores = [84, 92, 78]\nfor name, score in zip(names, scores):\n    print(f\"{name}: {score}\")\n\nAla: 84\nBartek: 92\nCezary: 78\n\n\nProtip: list(zip(names, scores)) da listę krotek."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#list-comprehension-szybko-twórz-listy",
     "href": "cheatsheets/01-python-basics.html#list-comprehension-szybko-twórz-listy",
-    "title": "Python Basics — 6 protipów",
+    "title": "Python Basics — 9 protipów",
     "section": "3) List Comprehension — szybko twórz listy",
     "text": "3) List Comprehension — szybko twórz listy\n\nnums = [1, 2, 3, 4, 5]\nsquares_even = [x*x for x in nums if x % 2 == 0]\nsquares_even\n\n[4, 16]\n\n\n\n\nMini-zadanie ✅\nWygeneruj listę długości każdego napisu w fruits, ale tylko dla owoców o nazwie dłuższej niż 5 znaków.\n\n# TODO: uzupełnij list comprehension\nfruits = [\"apple\", \"banana\", \"cherry\", \"kiwi\"]\n# lengths = [...]\n# lengths"
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#dictionary-comprehension-buduj-słowniki-efektywnie",
     "href": "cheatsheets/01-python-basics.html#dictionary-comprehension-buduj-słowniki-efektywnie",
-    "title": "Python Basics — 6 protipów",
+    "title": "Python Basics — 9 protipów",
     "section": "4) Dictionary Comprehension — buduj słowniki efektywnie",
     "text": "4) Dictionary Comprehension — buduj słowniki efektywnie\n\nproducts = [\"laptop\", \"mouse\", \"keyboard\", \"monitor\"]\nprices = [2999, 59, 199, 899]\nproduct_dict = {product: price for product, price in zip(products, prices) if price &lt; 1000}\nproduct_dict\n\n{'mouse': 59, 'keyboard': 199, 'monitor': 899}\n\n\nProtip: Możesz też tworzyć słowniki z warunkami: {k: v for k, v in items if condition}."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#f-strings-formatuj-stringi-czytelnie",
     "href": "cheatsheets/01-python-basics.html#f-strings-formatuj-stringi-czytelnie",
-    "title": "Python Basics — 6 protipów",
+    "title": "Python Basics — 9 protipów",
     "section": "5) f-strings — formatuj stringi czytelnie",
     "text": "5) f-strings — formatuj stringi czytelnie\n\nname = \"Anna\"\nage = 25\nscore = 95.567\n# Stary sposób\nprint(\"Nazywam się \" + name + \", mam \" + str(age) + \" lat\")\n# f-string way 🚀\nprint(f\"Nazywam się {name}, mam {age} lat i mój wynik to {score:.2f}\")\n\nNazywam się Anna, mam 25 lat\nNazywam się Anna, mam 25 lat i mój wynik to 95.57\n\n\nDlaczego warto: Czytelniejsze i szybsze niż .format() czy konkatenacja."
   },
   {
     "objectID": "cheatsheets/01-python-basics.html#collections.counter-licz-elementy-automatycznie",
     "href": "cheatsheets/01-python-basics.html#collections.counter-licz-elementy-automatycznie",
-    "title": "Python Basics — 6 protipów",
+    "title": "Python Basics — 9 protipów",
     "section": "6) collections.Counter — licz elementy automatycznie",
     "text": "6) collections.Counter — licz elementy automatycznie\n\nfrom collections import Counter\ngrades = [\"A\", \"B\", \"A\", \"C\", \"B\", \"A\", \"B\", \"C\", \"A\"]\ngrade_counts = Counter(grades)\nprint(grade_counts)\nprint(f\"Najczęstsza ocena: {grade_counts.most_common(1)[0][0]}\")\n\nCounter({'A': 4, 'B': 3, 'C': 2})\nNajczęstsza ocena: A\n\n\nData Science tip: Idealne do analizy częstości kategorii w danych!"
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#args-i-kwargs-elastyczne-funkcje",
+    "href": "cheatsheets/01-python-basics.html#args-i-kwargs-elastyczne-funkcje",
+    "title": "Python Basics — 9 protipów",
+    "section": "7) *args i **kwargs — elastyczne funkcje",
+    "text": "7) *args i **kwargs — elastyczne funkcje\n\ndef smart_print(*args, **kwargs):\n    separator = kwargs.get('sep', ' | ')\n    prefix = kwargs.get('prefix', '&gt;&gt;&gt; ')\n    print(prefix + separator.join(str(arg) for arg in args))\n\n# Różne sposoby wywołania\nsmart_print(\"Python\", \"jest\", \"super\")\nsmart_print(\"A\", \"B\", \"C\", sep=\" -&gt; \", prefix=\"WYNIK: \")\nsmart_print(1, 2, 3, 4, 5, sep=\", \")\n\n&gt;&gt;&gt; Python | jest | super\nWYNIK: A -&gt; B -&gt; C\n&gt;&gt;&gt; 1, 2, 3, 4, 5\n\n\nDlaczego warto: Funkcje mogą przyjmować dowolną liczbę argumentów pozycyjnych (*args) i nazwanych (**kwargs)."
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#defaultdict-słowniki-z-domyślnymi-wartościami",
+    "href": "cheatsheets/01-python-basics.html#defaultdict-słowniki-z-domyślnymi-wartościami",
+    "title": "Python Basics — 9 protipów",
+    "section": "8) defaultdict — słowniki z domyślnymi wartościami",
+    "text": "8) defaultdict — słowniki z domyślnymi wartościami\n\nfrom collections import defaultdict\n\n# Standardowy słownik - trzeba sprawdzać klucze\nnormal_dict = {}\n# if 'python' not in normal_dict:\n#     normal_dict['python'] = []\n# normal_dict['python'].append('awesome')\n\n# defaultdict - automatyczne wartości domyślne\ncourses = defaultdict(list)\ncourses['python'].append('basics')\ncourses['python'].append('advanced')\ncourses['javascript'].append('react')\n\nprint(dict(courses))  # Konwersja do normalnego dict dla czytelności\n\n{'python': ['basics', 'advanced'], 'javascript': ['react']}\n\n\nProtip: defaultdict(int) dla liczników, defaultdict(list) dla grup, defaultdict(set) dla unikalnych wartości."
+  },
+  {
+    "objectID": "cheatsheets/01-python-basics.html#any-i-all-sprawdzaj-warunki-w-kolekcjach",
+    "href": "cheatsheets/01-python-basics.html#any-i-all-sprawdzaj-warunki-w-kolekcjach",
+    "title": "Python Basics — 9 protipów",
+    "section": "9) any() i all() — sprawdzaj warunki w kolekcjach",
+    "text": "9) any() i all() — sprawdzaj warunki w kolekcjach\n\nnumbers = [2, 4, 6, 8, 10]\nmixed_numbers = [1, 2, 3, 4, 5]\nempty_list = []\n\n# Czy wszystkie elementy są parzyste?\nprint(f\"Wszystkie parzyste w {numbers}: {all(n % 2 == 0 for n in numbers)}\")\nprint(f\"Wszystkie parzyste w {mixed_numbers}: {all(n % 2 == 0 for n in mixed_numbers)}\")\n\n# Czy którykolwiek element jest większy niż 5?\nprint(f\"Jakiś &gt; 5 w {numbers}: {any(n &gt; 5 for n in numbers)}\")\nprint(f\"Jakiś &gt; 5 w {mixed_numbers}: {any(n &gt; 5 for n in mixed_numbers)}\")\n\n# Edge case - pusta lista\nprint(f\"all([]) = {all(empty_list)}\")  # True (bo nie ma elementów fałszywych)\nprint(f\"any([]) = {any(empty_list)}\")  # False (bo nie ma elementów prawdziwych)\n\nWszystkie parzyste w [2, 4, 6, 8, 10]: True\nWszystkie parzyste w [1, 2, 3, 4, 5]: False\nJakiś &gt; 5 w [2, 4, 6, 8, 10]: True\nJakiś &gt; 5 w [1, 2, 3, 4, 5]: False\nall([]) = True\nany([]) = False\n\n\nData Science tip: Świetne do walidacji danych - all(df['age'] &gt; 0) sprawdzi czy każdy wiek jest dodatni!\n\n\nFinalne wyzwanie 🏆\nStwórz funkcję analyze_grades(grades_list), która:\n\nPrzyjmuje listę ocen (stringi: “A”, “B”, “C”, “D”, “F”)\nZwraca słownik z informacjami:\n\ncounts: liczba każdej oceny (użyj Counter)\nhas_failing: czy są oceny F (użyj any())\nall_passing: czy wszystkie oceny to A-D (użyj all())\ntop_grade: najczęstsza ocena\n\n\n\nfrom collections import Counter\n\ndef analyze_grades(grades_list):\n    # TODO: Uzupełnij funkcję\n    # counts = ...\n    # has_failing = ...\n    # all_passing = ...\n    # top_grade = ...\n    # return {...}\n    pass\n\n# Test\ntest_grades = [\"A\", \"B\", \"A\", \"C\", \"B\", \"A\", \"D\", \"C\", \"A\"]\n# result = analyze_grades(test_grades)\n# print(result)"
   },
   {
     "objectID": "cheatsheets/03-github-workflow.html",
@@ -130,7 +151,7 @@
     "href": "cheatsheets/03-github-workflow.html#krok-po-kroku---wypychanie-zmian",
     "title": "GitHub Workflow - Wypychanie zmian",
     "section": "📝 Krok po kroku - wypychanie zmian",
-    "text": "📝 Krok po kroku - wypychanie zmian\n\n1. Przygotowanie środowiska\nZanim zaczniesz pracować z repozytorium, upewnij się że:\n# Sprawdź czy masz zainstalowany Git\ngit --version\n\n# Skonfiguruj Git (tylko przy pierwszym użyciu)\ngit config --global user.name \"Twoje Imię Nazwisko\"\ngit config --global user.email \"twoj-email@example.com\"\n\n\n2. Klonowanie repozytorium\n# Sklonuj repozytorium z GitHub\ngit clone https://github.com/twoj-nick-github/twoja-nazwa-projektu.git\n\n# Przejdź do folderu projektu\ncd twoja-nazwa-projektu\n\n# Sprawdź status i dostępne gałęzie\ngit status\ngit branch -a\n\n\n3. Praca z gałęziami\n\nDla nowych zadań - utwórz nową gałąź:\n# Utwórz i przełącz się na nową gałąź\ngit checkout -b TASK-1-NazwaZadania\n\n# Sprawdź aktualną gałąź\ngit branch\n\n\nDla istniejącego kodu - zostań na main:\n# Upewnij się że jesteś na main\ngit checkout main\n\n# Pobierz najnowsze zmiany\ngit pull origin main\n\n\n\n4. Wprowadzanie zmian\nPo wprowadzeniu zmian w plikach:\n# Sprawdź które pliki zostały zmienione (czerwone = nieindeksowane)\ngit status\n\n# Dodaj wszystkie zmiany do indeksu\ngit add .\n\n# Sprawdź ponownie (zielone = gotowe do commit)\ngit status\n\n# Alternatywnie - dodaj konkretne pliki\ngit add nazwa-pliku.txt folder/inny-plik.py\n\n\n5. Zatwierdzanie zmian (commit)\n# Zatwierdź zmiany z opisem\ngit commit -m \"Dodano funkcję logowania użytkownika\"\n\n# Sprawdź historię commitów\ngit log --oneline\n💡 Dobre praktyki dla wiadomości commit: - Pisz w trybie rozkazującym: “Dodaj”, “Napraw”, “Zaktualizuj” - Bądź konkretny: zamiast “poprawki” napisz “Napraw błąd walidacji email” - Ogranicz do 50 znaków w pierwszej linii\n\n\n6. Wypychanie na GitHub\n\nDla nowej gałęzi:\n# Wypchnij nową gałąź (z flagą -u dla upstream)\ngit push -u origin NAZWA_GALEZI\n\n# Przykład\ngit push -u origin TASK-1-LoginFunction\n\n\nDla istniejącej gałęzi:\n# Wypchnij zmiany\ngit push\n\n# Lub explicite\ngit push origin main\n\n\n\n7. Weryfikacja na GitHub\nPo wykonaniu git push:\n\nOtwórz repozytorium na GitHub.com\nSprawdź czy pliki zostały zaktualizowane\nDla nowej gałęzi: GitHub pokaże opcję “Compare & pull request”\nUtwórz Pull Request jeśli pracujesz w zespole"
+    "text": "📝 Krok po kroku - wypychanie zmian\n\n1. Przygotowanie środowiska\nZanim zaczniesz pracować z repozytorium, upewnij się że:\n# Sprawdź czy masz zainstalowany Git\ngit --version\n\n# Skonfiguruj Git (tylko przy pierwszym użyciu)\ngit config --global user.name \"Twoje Imię Nazwisko\"\ngit config --global user.email \"twoj-email@example.com\"\n\n\n2. Klonowanie repozytorium\n# Sklonuj repozytorium z GitHub\ngit clone https://github.com/twoj-nick-github/twoja-nazwa-projektu.git\n\n# Przejdź do folderu projektu\ncd twoja-nazwa-projektu\n\n# Sprawdź status i dostępne gałęzie\ngit status\ngit branch -a\n\n\n3. Praca z gałęziami\n\nDla nowych zadań - utwórz nową gałąź:\n# Utwórz i przełącz się na nową gałąź\ngit checkout -b TASK-1-NazwaZadania\n\n# Sprawdź aktualną gałąź\ngit branch\n\n\nDla istniejącego kodu - zostań na main:\n# Upewnij się że jesteś na main\ngit checkout main\n\n# Pobierz najnowsze zmiany\ngit pull origin main\n🔥 Ważne!\n\nPrzystępując do pracy z kodem - zawsze pobierz najnowsze zmiany z repo\n\n\n\n\n4. Wprowadzanie zmian\nPo wprowadzeniu zmian w plikach:\n# Sprawdź które pliki zostały zmienione (czerwone = nieindeksowane)\ngit status\n\n# Dodaj wszystkie zmiany do indeksu\ngit add .\n\n# Sprawdź ponownie (zielone = gotowe do commit)\ngit status\n\n# Alternatywnie - dodaj konkretne pliki\ngit add nazwa-pliku.txt folder/inny-plik.py\n\n\n5. Zatwierdzanie zmian (commit)\n# Zatwierdź zmiany z opisem\ngit commit -m \"Dodano funkcję logowania użytkownika\"\n\n# Sprawdź historię commitów\ngit log --oneline\n💡 Dobre praktyki dla wiadomości commit:\n\nDo członków zespołu - pisz w trybie rozkazującym: “Dodaj”, “Napraw”, “Zaktualizuj”\nBądź konkretny: zamiast “poprawki” napisz “Napraw błąd walidacji email”\nOgranicz do 50 znaków w pierwszej linii\nNiech każdy opis commita będzie powiązany z faktyczną zmianą w kodzie\n\n\n\n6. Wypychanie na GitHub\n\nDla nowej gałęzi:\n# Wypchnij nową gałąź (z flagą -u dla upstream)\ngit push -u origin NAZWA_GALEZI\n\n# Przykład\ngit push -u origin TASK-1-LoginFunction\n\n\nDla istniejącej gałęzi:\n# Wypchnij zmiany\ngit push\n\n# Lub explicite\ngit push origin main\n\n\n\n7. Weryfikacja na GitHub\nPo wykonaniu git push:\n\nOtwórz repozytorium na GitHub.com\nSprawdź czy pliki zostały zaktualizowane\nDla nowej gałęzi: GitHub pokaże opcję “Compare & pull request”\nUtwórz Pull Request jeśli pracujesz w zespole"
   },
   {
     "objectID": "cheatsheets/03-github-workflow.html#najczęstsze-problemy-i-rozwiązania",
